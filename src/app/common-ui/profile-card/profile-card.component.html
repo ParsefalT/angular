@@ -1,0 +1,33 @@
+@if (profile) {
+<div class="profile-card">
+  <div class="avatar-name">
+    <img
+      [ngSrc]="profile.image | pipeImage" width="32" height="32"
+      alt="avatar"
+      class="profile_avatar"
+    />
+    <div class="profile-card__name">
+      <strong>{{ profile.username }}</strong>
+      <span>{{ profile.info }}</span>
+    </div>
+  </div>
+
+  <div class="prfile-card__description">
+    {{ profile.text }}
+  </div>
+
+  <div class="profile-card__tags">
+    @for (tag of profile.tags; track tag) {
+    <p class="skill-tag">{{ tag }}</p>
+
+    }
+  </div>
+
+  <div class="profile-card__action-btn">
+    <button class="btn">Send</button>
+  </div>
+</div>
+
+} @else {
+<div>not found</div>
+}
