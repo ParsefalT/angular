@@ -2,12 +2,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'pipeImage',
-  standalone: true
+  standalone: true,
 })
 export class PipeImagePipe implements PipeTransform {
-
   transform(value: string | null): string {
-    return "https://external-content.duckduckgo.com/iu" + value;
+    return 'https://icherniakov.ru/yt-course/' + value;
   }
-
 }

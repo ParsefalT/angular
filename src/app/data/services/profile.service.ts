@@ -8,11 +8,15 @@ import { Profile } from '../interfaces/profile-interface';
 export class ProfileService {
   http = inject(HttpClient);
 
-  baseApiUrl: string = 'https://718081c5976c31c6.mokky.dev';
+  baseApiUrl: string = 'https://icherniakov.ru/yt-course';
 
   constructor() {}
-
+  
   getTestAccounts() {
-    return this.http.get<Profile[]>(`${this.baseApiUrl}/users`);
+    return this.http.get<Profile[]>(`${this.baseApiUrl}/account/test_accounts`);
+  }
+
+  getMe() {
+    return this.http.get(`${this.baseApiUrl}/account/me`)
   }
 }

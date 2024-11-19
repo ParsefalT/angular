@@ -1,14 +1,40 @@
-<form action="" class="login-form">
+<form action="" class="login-form" [formGroup]="form" (ngSubmit)="onSubmit()">
   <h1>Login</h1>
   <label for="" class="tt-control-label m16">
     Username
-    <input type="text" class="tt-input" placeholder="type login" />
+    <input
+      formControlName="username"
+      type="text"
+      class="tt-input"
+      placeholder="type email"
+    />
   </label>
 
   <label for="" class="tt-control-label m32">
     Password
-    <input type="password" class="tt-input" placeholder="type login" />
+    <div class="password_hide">
+      <input
+        formControlName="password"
+        [type]="isPasswordVisible() ? 'text' : 'password'"
+        class="tt-input"
+        placeholder="type login"
+      />
+      <button
+        class="hide_btn"
+        [class.active]="isPasswordVisible()"
+        (click)="isPasswordVisible.set(!isPasswordVisible())"
+      >
+        <div class="hide"></div>
+      </button>
+    </div>
   </label>
-  <button class="btn">login</button>
+  <button class="btn" [disabled]="!form.valid">Login</button>
 </form>
-<img ngSrc="/koala.jpg" alt="koala" class="image" height="100" width="100" priority />
+<img
+  ngSrc="/koala.jpg"
+  alt="koala"
+  class="image"
+  height="100"
+  width="100"
+  priority
+/>

@@ -39,7 +39,24 @@ body {
   -ms-border-radius: 4px;
   -o-border-radius: 4px;
   height: 32px;
+  transition: all .3s;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -ms-transition: all .3s;
+  -o-transition: all .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.skill-tag:hover {
+  background-color: rgb(194, 142, 253);
+  cursor: default;
+  font-weight: bold;
+  font-size: 14px;
+
+}
+
 
 .btn {
   border: none;
@@ -67,6 +84,11 @@ body {
 .btn:active {
   background-color: rgb(143, 57, 143);
   scale: 0.99;
+}
+
+.btn:disabled {
+  background-color: gray;
+  cursor: not-allowed;
 }
 
 .image {
