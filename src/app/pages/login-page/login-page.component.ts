@@ -33,6 +33,7 @@ export class LoginPageComponent {
   onSubmit() {
     if (!this.form.valid) {
       console.log('not valid');
+      return;
     }
     this.authService
       //@ts-ignore

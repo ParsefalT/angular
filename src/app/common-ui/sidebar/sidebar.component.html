@@ -1,1 +1,32 @@
-<p>sidebar works!</p>
+<img src="/koala.jpg" alt="logo" class="logo" />
+
+<nav>
+  <ul class="main-menu-list m60">
+    @for (item of menuItems; track $index) {
+    <li>
+      <a [routerLink]="[item.link]" class="menu-item">{{ item.label }}</a>
+    </li>
+    }
+  </ul>
+</nav>
+
+<p class="subscribes m20">Subscrubas</p>
+
+@for (item of subscribers$ | async; track $index) {
+<app-subscribe-card [profile]="item"></app-subscribe-card>
+}
+
+<div class="m20">
+  <a [routerLink]="['/subscribes']" class="to-subscribers-link"
+    >All subscrubas</a
+  >
+</div>
+
+<footer class="footer m20">
+  <div>
+    @if(me(); as me) {
+    <a routerLink="['settings']" class="footer__link">{{ me.username }}</a>
+    }
+  </div>
+  <button class="btn bottom" (click)="logout()">logout</button>
+</footer>

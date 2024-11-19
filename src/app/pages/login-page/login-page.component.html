@@ -19,13 +19,13 @@
         class="tt-input"
         placeholder="type login"
       />
-      <button
+      <span
         class="hide_btn"
         [class.active]="isPasswordVisible()"
         (click)="isPasswordVisible.set(!isPasswordVisible())"
       >
         <div class="hide"></div>
-      </button>
+      </span>
     </div>
   </label>
   <button class="btn" [disabled]="!form.valid">Login</button>
