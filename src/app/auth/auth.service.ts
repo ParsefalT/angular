@@ -13,13 +13,14 @@ export class AuthService {
   cookieService = inject(CookieService);
   router = inject(Router);
   baseApiUrl: string = 'https://icherniakov.ru/yt-course/auth/';
+
   token: string | null = null;
-  refresh_token: string | null = null;
+  refreshToken: string | null = null;
 
   get isAuth() {
     if (!this.token) {
       this.token = this.cookieService.get('token');
-      this.refresh_token = this.cookieService.get('refresh_token');
+      this.refreshToken = this.cookieService.get('refreshToken');
     }
     return !!this.token;
   }
@@ -39,17 +40,19 @@ export class AuthService {
   logout() {
     this.cookieService.deleteAll();
     this.token = null;
-    this.refresh_token = null;
+    this.refreshToken = null;
     this.router.navigate(['/login']);
   }
 
   refreshAuthToken() {
     return this.http
       .post<TokenResponse>(`${this.baseApiUrl}refresh`, {
-        refresh_token: this.refresh_token,
+        refresh_token: this.refreshToken,
       })
       .pipe(
-        tap((res) => {}),
+        tap((res) => {
+          this.saveTokens(res);
+        }),
         catchError((err) => {
           this.logout();
           return throwError(err);
@@ -59,9 +62,9 @@ export class AuthService {
 
   saveTokens(res: TokenResponse) {
     this.token = res.access_token;
-    this.refresh_token = res.refresh_token;
+    this.refreshToken = res.refresh_token;
 
     this.cookieService.set('token', this.token);
-    this.cookieService.set('refreshToken', this.refresh_token);
+    this.cookieService.set('refreshToken', this.refreshToken);
   }
 }
