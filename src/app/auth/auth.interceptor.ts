@@ -43,6 +43,7 @@ const refreshAndProceed = (
     isRefreshing = true;
     return authService.refreshAuthToken().pipe(
       switchMap((res) => {
+        isRefreshing = false;
         return next(addToken(req, res.access_token));
       })
     );

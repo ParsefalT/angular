@@ -62,6 +62,6 @@ export class AuthService {
     this.refresh_token = res.refresh_token;
 
     this.cookieService.set('token', this.token);
-    this.cookieService.set('refresh_token', this.refresh_token);
+    this.cookieService.set('refreshToken', this.refresh_token);
   }
 }
