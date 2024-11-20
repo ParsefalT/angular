@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { SubscribeCardComponent } from '../subscribe-card/subscribe-card.component';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ProfileService } from '../../data/services/profile.service';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
@@ -14,7 +14,7 @@ interface MenuItems {
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [SubscribeCardComponent, RouterLink, AsyncPipe],
+  imports: [SubscribeCardComponent, RouterLink,RouterLinkActive, AsyncPipe],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })

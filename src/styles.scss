@@ -84,6 +84,8 @@ body {
   scale: 0.99;
 }
 
+
+
 .btn:disabled {
   background-color: gray;
   cursor: not-allowed;
@@ -150,6 +152,9 @@ body {
   -moz-transition: all 0.2s;
   -ms-transition: all 0.2s;
   -o-transition: all 0.2s;
+  // &.active {
+  //   background-color: rgb(143, 57, 143);
+  // }
 }
 
 .tt-form-input {

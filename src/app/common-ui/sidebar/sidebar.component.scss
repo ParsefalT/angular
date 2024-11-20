@@ -26,11 +26,6 @@
   -o-border-radius: 5px;
 }
 
-
-
-.subscribes {
-}
-
 .to-subscribers-link {
   text-decoration: none;
   color: wheat;
@@ -80,5 +75,9 @@
   position: absolute;
   bottom: 15px;
   width: calc(100% - 55px);
+}
 
+
+.active {
+  background-color: orange;
 }
