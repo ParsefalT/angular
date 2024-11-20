@@ -22,14 +22,14 @@ export class ProfileService {
     return this.http.get<Profile>(`${this.baseApiUrl}/account/${id}`);
   }
 
-  getSubscribers() {
+  getSubscribers(amount: number = 3) {
     return this.http
       .get<Pageble<Profile>>(`${this.baseApiUrl}/account/subscribers/`)
-      .pipe(map((res) => res.items.slice(0, 3)));
+      .pipe(map((res) => res.items.slice(0, amount)));
   }
 
   pathProfile(profile: Partial<Profile>) {
-    return this.http.patch<Profile>(`${this.baseApiUrl}/account/me}`, profile);
+    return this.http.patch<Profile>(`${this.baseApiUrl}/account/me`, profile);
   }
 
   getMe() {

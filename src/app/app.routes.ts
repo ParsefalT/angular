@@ -5,6 +5,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { LayoutComponent } from './common-ui/layout/layout.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { catActivateAuth } from './auth/access-guard';
+import { SettingPageComponent } from './pages/setting-page/setting-page.component';
 
 export const routes: Routes = [
   {
@@ -12,7 +13,8 @@ export const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', component: SearchPageComponent },
-      { path: 'profile', component: ProfilePageComponent },
+      { path: 'profile/:id', component: ProfilePageComponent },
+      { path: 'settings', component: SettingPageComponent },
     ],
     canActivate: [catActivateAuth],
   },

@@ -1,0 +1,14 @@
+@if(profile(); as profile) { @if(profile.avatarUrl) {
+<img [src]="profile.avatarUrl | pipeImage" alt="" class="avatar" />
+} @else {
+<img src="/koala.jpg" alt="" class="avatar" />
+}
+
+<div class="usernmae-and-name">
+  <h3>{{ profile.firstName }} {{ profile.lastName }}</h3>
+  <p>{{ profile.username }}</p>
+</div>
+
+}
+
+<!-- <a routerLink="['settings']" class="footer__link">{{ profile.username }}</a> -->
