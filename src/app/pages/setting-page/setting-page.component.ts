@@ -1,14 +1,15 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, effect, inject, ViewChild } from '@angular/core';
 import { ProfileHeaderComponent } from '../../common-ui/profile-header/profile-header.component';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProfileService } from '../../data/services/profile.service';
 import { firstValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
+import { AvatarUploadComponent } from './avatar-upload/avatar-upload.component';
 
 @Component({
   selector: 'app-setting-page',
   standalone: true,
-  imports: [ProfileHeaderComponent, ReactiveFormsModule],
+  imports: [ProfileHeaderComponent, ReactiveFormsModule, AvatarUploadComponent],
   templateUrl: './setting-page.component.html',
   styleUrl: './setting-page.component.scss',
 })
@@ -16,6 +17,8 @@ export class SettingPageComponent {
   fb = inject(FormBuilder);
   profileService = inject(ProfileService);
   router = inject(Router);
+
+  @ViewChild(AvatarUploadComponent) avatarUploader!: AvatarUploadComponent;
 
   form = this.fb.group({
     firstName: ['', Validators.required],
@@ -42,7 +45,12 @@ export class SettingPageComponent {
     if (this.form.invalid) {
       return;
     }
-
+    console.log(this.avatarUploader.avatar);
+    if (this.avatarUploader.avatar) {
+      firstValueFrom(
+        this.profileService.uploadAvatar(this.avatarUploader.avatar)
+      );
+    }
     //@ts-ignore
     firstValueFrom(
       //@ts-ignore
