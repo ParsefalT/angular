@@ -9,10 +9,10 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
+  baseApiUrl: string = 'https://icherniakov.ru/yt-course';
   http = inject(HttpClient);
-  cookieService = inject(CookieService);
   router = inject(Router);
-  baseApiUrl: string = 'https://icherniakov.ru/yt-course/auth/';
+  cookieService = inject(CookieService);
 
   token: string | null = null;
   refreshToken: string | null = null;
@@ -22,19 +22,33 @@ export class AuthService {
       this.token = this.cookieService.get('token');
       this.refreshToken = this.cookieService.get('refreshToken');
     }
+
     return !!this.token;
   }
 
-  constructor() {}
-
   login(payload: { username: string; password: string }) {
-    const fd = new FormData();
-    fd.append('username', payload.username);
-    fd.append('password', payload.password);
-
+    let fd = new FormData();
+    fd.set('username', payload.username);
+    fd.set('password', payload.password);
     return this.http
-      .post<TokenResponse>(`${this.baseApiUrl}token`, fd)
+      .post<TokenResponse>(`${this.baseApiUrl}/auth/token`, fd)
       .pipe(tap((val) => this.saveTokens(val)));
+  }
+
+  refreshAuthToken() {
+    return this.http
+      .post<TokenResponse>(`${this.baseApiUrl}/auth/refresh`, {
+        refresh_token: this.refreshToken,
+      })
+      .pipe(
+        tap((val) => {
+          this.saveTokens(val);
+        }),
+        catchError((error) => {
+          this.logout();
+          return throwError(error);
+        })
+      );
   }
 
   logout() {
@@ -44,25 +58,9 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  refreshAuthToken() {
-    return this.http
-      .post<TokenResponse>(`${this.baseApiUrl}refresh`, {
-        refresh_token: this.refreshToken,
-      })
-      .pipe(
-        tap((res) => {
-          this.saveTokens(res);
-        }),
-        catchError((err) => {
-          this.logout();
-          return throwError(err);
-        })
-      );
-  }
-
-  saveTokens(res: TokenResponse) {
-    this.token = res.access_token;
-    this.refreshToken = res.refresh_token;
+  saveTokens(val: TokenResponse) {
+    this.token = val.access_token;
+    this.refreshToken = val.refresh_token;
 
     this.cookieService.set('token', this.token);
     this.cookieService.set('refreshToken', this.refreshToken);

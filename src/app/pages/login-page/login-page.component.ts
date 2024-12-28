@@ -1,43 +1,38 @@
-import { NgOptimizedImage } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
+import { Router } from '@angular/router';
 
-interface IForm {
-  username: FormControl<string | null>;
-  password: FormControl<string | null>;
-}
 @Component({
   selector: 'app-login-page',
   standalone: true,
-  imports: [NgOptimizedImage, ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
 })
 export class LoginPageComponent {
   authService = inject(AuthService);
   router = inject(Router);
-  form = new FormGroup<IForm>({
-    username: new FormControl(null, Validators.required),
-    password: new FormControl(null, Validators.required),
+
+  form = new FormGroup({
+    username: new FormControl<string | null>('', Validators.required),
+    password: new FormControl<string | null>('', Validators.required),
   });
 
-  isPasswordVisible = signal<boolean>(false);
-
   onSubmit() {
-    if (!this.form.valid) {
-      console.log('not valid');
-      return;
-    }
-    this.authService
-      //@ts-ignore
-      .login(this.form.value)
-      .subscribe((res) => this.router.navigate(['']));
+    if (
+      (this.form.valid && this.form.value.password !== '') ||
+      this.form.value.password!.trim() !== ''
+    ) {
+      this.authService
+        .login(this.form.value as { username: string; password: string })
+        .subscribe();
+        this.router.navigate(['/']);
+      }
   }
 }

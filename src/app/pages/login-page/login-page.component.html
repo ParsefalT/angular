@@ -1,40 +1,36 @@
-<form action="" class="login-form" [formGroup]="form" (ngSubmit)="onSubmit()">
-  <h1>Login</h1>
-  <label for="" class="tt-control-label m16">
-    Username
+<form class="login-form" action="" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h1 class="h1">Enter</h1>
+
+  <label for="" class="tt-control-label">
+    username
     <input
+      name="username"
       formControlName="username"
       type="text"
+      placeholder="type login"
       class="tt-input"
-      placeholder="type email"
     />
+    @if(form.controls.username.errors && form.controls.username.touched) {
+      <strong style="color: red">man! type your username!!!</strong>
+      }
   </label>
 
-  <label for="" class="tt-control-label m32">
-    Password
-    <div class="password_hide">
-      <input
-        formControlName="password"
-        [type]="isPasswordVisible() ? 'text' : 'password'"
-        class="tt-input"
-        placeholder="type login"
-      />
-      <span
-        class="hide_btn"
-        [class.active]="isPasswordVisible()"
-        (click)="isPasswordVisible.set(!isPasswordVisible())"
-      >
-        <div class="hide"></div>
-      </span>
-    </div>
+  <label for="" class="tt-control-label">
+    password
+    <input
+      name="password"
+      formControlName="password"
+      type="text"
+      placeholder="type password"
+      class="tt-input"
+    />
+    @if(form.controls.password.errors && form.controls.password.touched) {
+    <strong style="color: red">man! type your password!!!</strong>
+    }
   </label>
-  <button class="btn" [disabled]="!form.valid">Login</button>
+  <button type="submit" class="btn" [disabled]="!form.valid">
+    login
+  </button>
 </form>
-<img
-  ngSrc="/koala.jpg"
-  alt="koala"
-  class="image"
-  height="100"
-  width="100"
-  priority
-/>
+
+<img src="koala.jpg" alt="logoKoala" class="logo-koala" />

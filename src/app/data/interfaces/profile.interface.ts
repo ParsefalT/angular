@@ -2,11 +2,11 @@ export interface Profile {
   id: number;
   username: string;
   avatarUrl: string;
-  subscribersAmount: number;
+  subscriptionsAmount: number;
+  description: string;
   firstName: string;
   lastName: string;
-  isActive: true;
+  isActive: boolean;
   stack: string[];
   city: string;
-  description: string;
 }

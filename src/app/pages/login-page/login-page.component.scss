@@ -1,66 +1,21 @@
 :host {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  place-items: center;
-  height: 100dvh;
-  margin: 0 5%;
+    height: 100dvh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center;
+    gap: 24px;
 }
 
 .login-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  width: 450px;
+    display: grid;
+    gap: 15px;
 }
 
-.tt-control-label {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.tt-input {
-  width: 100%;
-  border: 1px solid wheat;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 16px;
-  display: block;
-  border-radius: 4px;
-  padding: 12px 20px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
-}
-
-.password_hide {
-  position: relative;
-}
-.hide_btn {
-  width: 15px;
-  height: 15px;
-  border-radius: 5px;
-  background-color: black;
-  position: absolute;
-  right: 10px;
-  top: 15px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  border: none;
-  transition: all 0.2s;
-  cursor: pointer;
-  -webkit-transition: all 0.2s;
-  -moz-transition: all 0.2s;
-  -ms-transition: all 0.2s;
-  -o-transition: all 0.2s;
-}
-
-.hide_btn:active {
-  background-color: rgb(221, 84, 221);
-}
-
-.hide_btn.active {
-  background-color: rgb(221, 84, 221);
+.logo-koala {
+    max-width: 550px;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
 }
