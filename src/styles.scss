@@ -1,5 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
+:root {
+  --dark-hover-color: #161616;
+  --primary-color: #ae7aff;
+}
+
 html {
   // height: 100vh;
 }
@@ -122,6 +127,22 @@ body {
   margin-top: 60px;
 }
 
+.mb16 {
+  margin-bottom: 16px;
+}
+
+.mb20 {
+  margin-bottom: 20px;
+}
+
+.mb32 {
+  margin-bottom: 32px;
+}
+
+.mb60 {
+  margin-bottom: 60px;
+}
+
 .link {
   color: white;
   text-decoration: none;
@@ -207,4 +228,10 @@ body {
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
   -o-border-radius: 4px;
+}
+
+.medium-text {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
 }

@@ -4,7 +4,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
 
@@ -19,6 +19,9 @@ export class LoginPageComponent {
   authService = inject(AuthService);
   router = inject(Router);
 
+  isTelegaVisible = signal<boolean>(true);
+  isPasswordVisible = signal<boolean>(false);
+
   form = new FormGroup({
     username: new FormControl<string | null>('', Validators.required),
     password: new FormControl<string | null>('', Validators.required),
@@ -32,7 +35,7 @@ export class LoginPageComponent {
       this.authService
         .login(this.form.value as { username: string; password: string })
         .subscribe();
-        this.router.navigate(['/']);
-      }
+      this.router.navigate(['/']);
+    }
   }
 }
