@@ -55,6 +55,14 @@ body {
   justify-content: center;
 }
 
+.profile-card__tags {
+  height: min-content;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+
 .skill-tag:hover {
   background-color: rgb(194, 142, 253);
   cursor: default;
@@ -106,9 +114,23 @@ body {
 }
 
 .h1 {
-  font-size: 48;
+  font-size: 48px;
   line-height: 56px;
   font-size: 800;
+}
+
+.h6 {
+  font-size: 18px;
+  font-weight: 800;
+  font-style: normal;
+  line-height: 24px;
+}
+
+.h4 {
+  font-size: 24px;
+  font-weight: normal;
+  font-weight: 800;
+  line-height: 32px;
 }
 
 .m16 {
@@ -125,6 +147,10 @@ body {
 
 .m60 {
   margin-top: 60px;
+}
+
+.mb4 {
+  margin-bottom: 4px;
 }
 
 .mb16 {
