@@ -30,7 +30,7 @@ export class SidebarComponent {
   me = this.profileService.me;
 
   menuItems: MenuItems[] = [
-    { label: 'My Page', icon: 'home', link: '' },
+    { label: 'My Page', icon: 'home', link: 'profile/me' },
     { label: 'Chats', icon: 'msg', link: '' },
     { label: 'Search', icon: 'search', link: '' },
   ];

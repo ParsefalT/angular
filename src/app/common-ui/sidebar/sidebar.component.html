@@ -3,10 +3,10 @@
 <nav class="m60">
   <ul class="main-menu-list">
     <li class="m16" *ngFor="let item of menuItems">
-      <button class="menu-item">
+      <a class="menu-item" [routerLink]="item.link">
         <svg [icon]="item.icon" />
         <span>{{ item.label }}</span>
-      </button>
+      </a>
     </li>
   </ul>
 </nav>
