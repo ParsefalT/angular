@@ -36,5 +36,7 @@
 
 
 .text_left {
-    text-align: right;
+    display: flex;
+    gap: 12px;
+    justify-content: end;
 }

@@ -45,6 +45,11 @@
     </label>
 
     <label class="tt-form-label">
+      <span class="tt-form-lable__text">Avatar</span>
+      <app-avatar-upload></app-avatar-upload>
+    </label>
+
+    <label class="tt-form-label">
       <span class="tt-form-lable__text">Skills</span>
       <input
         type="text"
@@ -57,7 +62,8 @@
 
   <div>
     <div class="text_left">
-        <button class="btn" (click)="onSave()">save</button>
+      <button class="btn" (click)="logout()">logout</button>
+      <button class="btn" (click)="onSave()">save</button>
     </div>
   </div>
 </form>

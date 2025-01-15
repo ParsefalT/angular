@@ -1,0 +1,52 @@
+:host {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: 123px 1fr;
+  padding-bottom: 16px;
+  border-bottom: 1px solid orange;
+}
+
+.avatar {
+  object-fit: cover;
+  height: 132px;
+  width: 132px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+.dropzone {
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+
+  border: 1px dashed orange;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.dropzone.fileover {
+  border: 1px dashed rgb(185, 131, 29);
+}
+
+.dropzone-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 14px;
+  }
+}
+
+.avatar-input {
+  display: none;
+}
