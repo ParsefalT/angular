@@ -2,6 +2,7 @@
   display: block;
   padding: 20px 12px;
   position: relative;
+  border-right: 1px solid white;
 }
 
 .logo {
@@ -38,6 +39,7 @@
   align-items: center;
   gap: 12px;
 
+  &.active,
   &:hover,
   &:focus-visible {
     background: var(--dark-hover-color);

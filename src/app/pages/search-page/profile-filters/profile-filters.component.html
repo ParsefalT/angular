@@ -1,0 +1,31 @@
+<form action="" class="profile-search-form" [formGroup]="searchForm">
+  <label class="tt-form-label">
+    <span class="tt-form-lable__text">Name user</span>
+    <input
+      type="text"
+      name="username"
+      class="tt-form-input"
+      formControlName="firstName"
+    />
+  </label>
+
+  <label class="tt-form-label">
+    <span class="tt-form-lable__text">Surname</span>
+    <input
+      type="text"
+      name="surname"
+      class="tt-form-input"
+      formControlName="lastName"
+    />
+  </label>
+
+  <label class="tt-form-label">
+    <span class="tt-form-lable__text">Skills</span>
+    <input
+      type="text"
+      name="skills"
+      class="tt-form-input"
+      formControlName="stack"
+    />
+  </label>
+</form>
