@@ -62,7 +62,6 @@ body {
   gap: 5px;
 }
 
-
 .skill-tag:hover {
   background-color: rgb(194, 142, 253);
   cursor: default;
@@ -88,6 +87,24 @@ body {
   -moz-transition: all 0.3s;
   -ms-transition: all 0.3s;
   -o-transition: all 0.3s;
+}
+
+.btn-icon {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--dark-hover-color);
+  border-radius: 5px;
+  background-color: rgb(223, 73, 223);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg16 {
+  width: 16px;
+  height: 12px;
+  color: black;
 }
 
 .btn:hover {
