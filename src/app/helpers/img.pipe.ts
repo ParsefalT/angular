@@ -5,7 +5,11 @@ import { Pipe, PipeTransform } from '@angular/core';
   standalone: true,
 })
 export class ImgPipe implements PipeTransform {
-  transform(value: unknown, ...args: unknown[]): string {
-    return `https://icherniakov.ru/yt-course/${value}`;
+  transform(value: string | null, ...args: unknown[]): string {
+    if(value == null) {
+      return 'Content.png'
+    } else {
+      return `https://icherniakov.ru/yt-course/${value}`;
+    }
   }
 }

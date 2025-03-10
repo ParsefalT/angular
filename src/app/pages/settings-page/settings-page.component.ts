@@ -1,15 +1,11 @@
 import { Component, effect, inject, ViewChild } from '@angular/core';
 import { ProfileHeaderComponent } from '../../common-ui/profile-header/profile-header.component';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProfileService } from '../../data/services/profile.service';
 import { firstValueFrom } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 import { AvatarUploadComponent } from './avatar-upload/avatar-upload.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings-page',
@@ -22,6 +18,7 @@ export class SettingsPageComponent {
   fb = inject(FormBuilder);
   profileService = inject(ProfileService);
   authService = inject(AuthService);
+  router = inject(Router);
 
   @ViewChild(AvatarUploadComponent) avatarUpload!: AvatarUploadComponent;
 
@@ -75,6 +72,9 @@ export class SettingsPageComponent {
   logout() {
     this.authService.logout();
   }
+  cancel() {
+    this.router.navigate(['/']);
+  }
 
   splitStack(stack: string | null | string[] | undefined): string[] {
     if (!stack) return [];
@@ -83,7 +83,7 @@ export class SettingsPageComponent {
     return stack.split(',');
   }
 
-  mergeStack(stack: string | null | string[] | undefined) {
+  mergeStack(stack: string | null | string[] | undefined): string {
     if (!stack) return '';
     if (Array.isArray(stack)) return stack.join(',');
 

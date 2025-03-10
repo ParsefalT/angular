@@ -3,6 +3,7 @@ import {
   EventEmitter,
   HostBinding,
   inject,
+  Input,
   input,
   NgModule,
   Output,
@@ -37,7 +38,7 @@ export class PostInputComponent {
     return this.isCommentInput();
   }
 
-  postText: string = '';
+  @Input() postText: string = '';
 
   onTextAreaInput(event: Event) {
     const textarea = event.target as HTMLTextAreaElement;
@@ -46,29 +47,34 @@ export class PostInputComponent {
     this.r2.setStyle(textarea, 'height', textarea.scrollHeight + 'px');
   }
 
-  onCreatePost() {
-    if (!this.postText) return;
+  // onCreatePost() {
+  //   if (!this.postText) return;
 
-    if (this.isCommentInput()) {
-      firstValueFrom(
-        this.postService.createComment({
-          text: this.postText,
-          authorId: this.profile()!.id,
-          postId: this.postId(),
-        })
-      ).then((res) => {
-        this.postText = '';
-        this.created.emit();
-      });
-      return;
-    }
+  //   if (this.isCommentInput()) {
+  //     firstValueFrom(
+  //       this.postService.createComment({
+  //         text: this.postText,
+  //         authorId: this.profile()!.id,
+  //         postId: this.postId(),
+  //       })
+  //     ).then((res) => {
+  //       this.postText = '';
+  //       this.created.emit();
+  //     });
+  //     return;
+  //   }
 
-    firstValueFrom(
-      this.postService.createPost({
-        title: 'amazing post',
-        content: this.postText,
-        authorId: this.profile()!.id,
-      })
-    ).then((res) => (this.postText = ''));
+  //   firstValueFrom(
+  //     this.postService.createPost({
+  //       title: 'amazing post',
+  //       content: this.postText,
+  //       authorId: this.profile()!.id,
+  //     })
+  //   ).then((res) => (this.postText = ''));
+  // }
+
+  @Output() postfeed = new EventEmitter();
+  clickSendPost() {
+    this.postfeed.emit(this.postText);
   }
 }

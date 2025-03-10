@@ -34,8 +34,9 @@ export class LoginPageComponent {
     ) {
       this.authService
         .login(this.form.value as { username: string; password: string })
-        .subscribe();
-      this.router.navigate(['/']);
+        .subscribe((res) => {
+          this.router.navigate(['/']);
+        });
     }
   }
 }

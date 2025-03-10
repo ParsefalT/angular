@@ -38,5 +38,9 @@
 .text_left {
     display: flex;
     gap: 12px;
-    justify-content: end;
+    justify-content: space-between;
+}
+
+.mr16 {
+    margin-right: 16px;
 }

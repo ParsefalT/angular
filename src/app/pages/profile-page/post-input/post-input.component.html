@@ -1,7 +1,4 @@
-<app-avatar-circle
-  class="size32"
-  [avatarUrl]="profile()?.avatarUrl"
-></app-avatar-circle>
+<app-avatar-circle class="size32"></app-avatar-circle>
 
 <textarea
   name=""
@@ -12,6 +9,9 @@
   placeholder="type something"
 ></textarea>
 
-<button class="btn-icon" (click)="onCreatePost()">
+<button
+  class="btn-icon"
+  (click)="clickSendPost()"
+>
   <svg icon="send-message" class="svg16"></svg>
 </button>

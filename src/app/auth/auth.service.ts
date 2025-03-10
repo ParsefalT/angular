@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  baseApiUrl: string = 'https://icherniakov.ru/yt-course';
+  baseApiUrl: string = 'https://icherniakov.ru/yt-course/auth';
   http = inject(HttpClient);
   router = inject(Router);
   cookieService = inject(CookieService);
@@ -27,17 +27,18 @@ export class AuthService {
   }
 
   login(payload: { username: string; password: string }) {
-    let fd = new FormData();
+    const fd = new FormData();
     fd.set('username', payload.username);
     fd.set('password', payload.password);
+
     return this.http
-      .post<TokenResponse>(`${this.baseApiUrl}/auth/token`, fd)
+      .post<TokenResponse>(`${this.baseApiUrl}/token`, fd)
       .pipe(tap((val) => this.saveTokens(val)));
   }
 
   refreshAuthToken() {
     return this.http
-      .post<TokenResponse>(`${this.baseApiUrl}/auth/refresh`, {
+      .post<TokenResponse>(`${this.baseApiUrl}/refresh`, {
         refresh_token: this.refreshToken,
       })
       .pipe(

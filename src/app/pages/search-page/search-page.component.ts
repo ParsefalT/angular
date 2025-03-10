@@ -3,7 +3,6 @@ import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ProfileCardComponent } from '../../common-ui/profile-card/profile-card.component';
 import { ProfileFiltersComponent } from './profile-filters/profile-filters.component';
-import { Profile } from '../../data/interfaces/profile.interface';
 import { ProfileService } from '../../data/services/profile.service';
 
 @Component({
@@ -22,7 +21,5 @@ import { ProfileService } from '../../data/services/profile.service';
 export class SearchPageComponent {
   profileService = inject(ProfileService);
 
-  profiles = this.profileService.filteredProfiles
-
-  constructor() {}
+  profiles = this.profileService.filteredProfiles;
 }
