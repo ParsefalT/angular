@@ -1,1 +1,50 @@
-<p>experimental works!</p>
+<form (ngSubmit)="onSubmit($event)">
+  <input
+    type="text"
+    name="name"
+    id=""
+    [ngModel]="person.name"
+    (ngModelChange)="onChange($event)"
+    [ngModelOptions]="{
+      updateOn: 'blur'
+    }"
+  />
+  <br />
+  <input type="text" name="lastName" id="" [(ngModel)]="person.lastName" />
+  <input
+    type="text"
+    id=""
+    [(ngModel)]="hobby2"
+    [ngModelOptions]="{ standalone: true }"
+  />
+  <input
+    type="text"
+    id=""
+    [(ngModel)]="hobby1"
+    [ngModelOptions]="{ standalone: true }"
+    #hobby="ngModel"
+    required
+  />
+  @if (hobby.hasError("required") && hobby.touched) {
+  <span>error</span>
+  } @else {
+
+  {{ hobby1 }}
+  }
+  <br />
+  <div ngModelGroup="address">
+    <input
+      type="text"
+      name="street"
+      id=""
+      [(ngModel)]="person.address.street"
+    />
+  </div>
+  <br />
+
+  <pre>
+    {{ person | json }}
+  </pre>
+
+  <button type="submit">submit</button>
+</form>

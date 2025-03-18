@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { JsonPipe } from '@angular/common';
+import { Component, HostBinding, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import {
+  BehaviorSubject,
   combineLatest,
   filter,
   first,
@@ -18,6 +21,7 @@ import {
   timer,
   zip,
 } from 'rxjs';
+import { TestDirective } from './test.directive';
 
 function customFromEvent(el: HTMLElement, eventName: string) {
   return new Observable((subscribe) => {
@@ -70,63 +74,37 @@ function random() {
 @Component({
   selector: 'app-experimental',
   standalone: true,
-  imports: [],
+  imports: [FormsModule, JsonPipe, TestDirective],
   templateUrl: './experimental.component.html',
   styleUrl: './experimental.component.scss',
 })
 export class ExperimentalComponent {
+  person = {
+    name: '',
+    lastName: '',
+    address: {
+      street: '',
+      building: 0,
+    },
+  };
+  directive = inject(TestDirective, {skipSelf:false});
 
-  subject$ = new Subject()
   constructor() {
-    // customFromEvent(document.body, 'click')
-    //   .pipe(take(5))
-    //   .subscribe((val) => console.log(val));
+    this.directive.elRef.nativeElement.style.border = '10px solid violet';
+  }
 
-    // customTimer(1000)
-    //   .pipe(take(5))
-    //   .subscribe((val) => console.log(val));
+  hobby2: string = 'asd';
+  hobby1: string | null = '';
 
-    // let timer = customTime(1000)
-    // timer.subscribe(console.log)
-    // timer.subscribe(console.log)
+  onChange(event: any) {
+    console.log(event);
+    this.person.name = event;
+  }
 
-    // let som = random().pipe(shareReplay())
-    // som.subscribe(console.log)
-    // som.subscribe(console.log)
-    // som.subscribe(console.log)
-    // const obs = new Observable((subscribe) => {
-    //   subscribe.next(1);
-    //   subscribe.next(2);
-    //   subscribe.next(3);
-    //   subscribe.next(4);
-    //   return () => {
-    //     console.log('destroy');
-    //   };
-    // });
-    // const sub = obs.subscribe((val) => console.log(val));
-
-    // setTimeout(() => {
-    //   sub.unsubscribe();
-    // }, 3000);
-
-    // const observable$ = forkJoin([
-    //   interval(3000).pipe(map((i) => '1_' + i),take(2)),
-    //   interval(200).pipe(map((i) => '2_' + i),take(2)),
-    //   // fromEvent(document.body, 'click'),
-    // ])
-
-    // observable$.subscribe({
-    //   next: (val) => console.log('next', val),
-    //   error: (val) => console.log('error', val),
-    //   complete: () => console.log('complete'),
-    // });
-
-    this.subject$.subscribe(val => {
-      console.log(val)
-    })
-    
-
-    this.subject$.next(123)
-    this.subject$.next(12)
+  onSubmit(event: SubmitEvent) {
+    console.log(this.hobby2);
+    //@ts-ignore
+    console.log(window.ng.getDirectives(event.target)[2].form.value);
   }
 }
+ 

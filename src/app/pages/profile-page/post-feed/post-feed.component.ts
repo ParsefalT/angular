@@ -13,13 +13,19 @@ import {
 import { PostInputComponent } from '../post-input/post-input.component';
 import { PostComponent } from '../post/post.component';
 import { ExperimentalComponent } from '../../../exp/experimental/experimental.component';
-import { auditTime, firstValueFrom, fromEvent, pipe, tap } from 'rxjs';
+import { auditTime, firstValueFrom, fromEvent, tap } from 'rxjs';
 import { ProfileService } from '../../../data/services/profile.service';
+import { TestDirective } from '../../../exp/experimental/test.directive';
 
 @Component({
   selector: 'app-post-feed',
   standalone: true,
-  imports: [PostInputComponent, PostComponent, ExperimentalComponent],
+  imports: [
+    PostInputComponent,
+    PostComponent,
+    ExperimentalComponent,
+    TestDirective
+  ],
   templateUrl: './post-feed.component.html',
   styleUrl: './post-feed.component.scss',
 })
@@ -58,7 +64,7 @@ export class PostFeedComponent {
   profile = inject(ProfileService).me;
   postId = input<number>(0);
   isCommentInput = input(false);
-  postText: string = ''
+  postText: string = '';
   @Output() created = new EventEmitter();
 
   @HostBinding('class.comment')
@@ -92,7 +98,7 @@ export class PostFeedComponent {
     ).then((res) => (this.postText = ''));
   }
 
-  test(event:string) {
+  test(event: string) {
     this.onCreatePost(event);
   }
 }
