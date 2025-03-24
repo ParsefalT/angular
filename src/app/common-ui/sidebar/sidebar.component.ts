@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { SvgIconComponent } from '../svg-icon/svg-icon.component';
-import { AsyncPipe, CommonModule, JsonPipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { SubscriberCardComponent } from './subscriber-card/subscriber-card.component';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ProfileService } from '../../data/services/profile.service';
@@ -9,7 +9,6 @@ import { ImgPipe } from '../../helpers/img.pipe';
 
 @Component({
   selector: 'app-sidebar',
-  standalone: true,
   imports: [
     SvgIconComponent,
     CommonModule,
@@ -18,7 +17,6 @@ import { ImgPipe } from '../../helpers/img.pipe';
     RouterLinkActive,
     SvgIconComponent,
     AsyncPipe,
-    JsonPipe,
     ImgPipe,
   ],
   templateUrl: './sidebar.component.html',

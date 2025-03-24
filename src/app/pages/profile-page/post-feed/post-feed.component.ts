@@ -13,21 +13,26 @@ import {
 import { PostInputComponent } from '../post-input/post-input.component';
 import { PostComponent } from '../post/post.component';
 import { ExperimentalComponent } from '../../../exp/experimental/experimental.component';
-import { auditTime, firstValueFrom, fromEvent, tap } from 'rxjs';
+import { auditTime, firstValueFrom, fromEvent, last, switchMap, tap } from 'rxjs';
 import { ProfileService } from '../../../data/services/profile.service';
 import { TestDirective } from '../../../exp/experimental/test.directive';
+import { COLOR } from '../../../exp/experimental/InjectToken';
 
 @Component({
   selector: 'app-post-feed',
-  standalone: true,
   imports: [
-    PostInputComponent,
     PostComponent,
-    ExperimentalComponent,
-    TestDirective
+    PostInputComponent,
+    // ExperimentalComponent,
+    // TestDirective,
   ],
   templateUrl: './post-feed.component.html',
   styleUrl: './post-feed.component.scss',
+  providers: [
+    // {provide: COLOR,
+    //   useValue: "pink"
+    // }
+  ],
 })
 export class PostFeedComponent {
   postService = inject(PostService);
@@ -40,7 +45,7 @@ export class PostFeedComponent {
   onWindowResize() {
     fromEvent(window, 'resize')
       .pipe(
-        auditTime(1500),
+        // auditTime(1500),
         tap(() => this.resizeFeed())
       )
       .subscribe((val) => console.log(123));
@@ -49,7 +54,9 @@ export class PostFeedComponent {
   constructor() {
     firstValueFrom(this.postService.fetchPosts());
   }
-
+  // testt() {
+  //   this.feed().map(item => this.postService.deletePost(item.id).pipe().subscribe())
+  // }
   ngAfterViewInit() {
     this.resizeFeed();
   }
@@ -70,35 +77,5 @@ export class PostFeedComponent {
   @HostBinding('class.comment')
   get isComment() {
     return this.isCommentInput();
-  }
-
-  onCreatePost(postText: string) {
-    if (!postText) return;
-
-    if (this.isCommentInput()) {
-      firstValueFrom(
-        this.postService.createComment({
-          text: postText,
-          authorId: this.profile()!.id,
-          postId: this.postId(),
-        })
-      ).then((res) => {
-        this.postText = '';
-        this.created.emit();
-      });
-      return;
-    }
-
-    firstValueFrom(
-      this.postService.createPost({
-        title: 'amazing post',
-        content: postText,
-        authorId: this.profile()!.id,
-      })
-    ).then((res) => (this.postText = ''));
-  }
-
-  test(event: string) {
-    this.onCreatePost(event);
   }
 }

@@ -8,11 +8,10 @@ import { AvatarUploadComponent } from './avatar-upload/avatar-upload.component';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-settings-page',
-  standalone: true,
-  imports: [ProfileHeaderComponent, ReactiveFormsModule, AvatarUploadComponent],
-  templateUrl: './settings-page.component.html',
-  styleUrl: './settings-page.component.scss',
+    selector: 'app-settings-page',
+    imports: [ProfileHeaderComponent, ReactiveFormsModule, AvatarUploadComponent],
+    templateUrl: './settings-page.component.html',
+    styleUrl: './settings-page.component.scss'
 })
 export class SettingsPageComponent {
   fb = inject(FormBuilder);

@@ -4,11 +4,10 @@ import { DndDirective } from '../../../common-ui/directives/dnd.directive';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-avatar-upload',
-  standalone: true,
-  imports: [SvgIconComponent, DndDirective, ReactiveFormsModule],
-  templateUrl: './avatar-upload.component.html',
-  styleUrl: './avatar-upload.component.scss',
+    selector: 'app-avatar-upload',
+    imports: [SvgIconComponent, DndDirective, ReactiveFormsModule],
+    templateUrl: './avatar-upload.component.html',
+    styleUrl: './avatar-upload.component.scss'
 })
 export class AvatarUploadComponent {
   preview = signal<string>('');
@@ -17,7 +16,6 @@ export class AvatarUploadComponent {
 
   fileBrowserHandler(event: Event) {
     const file = (event.target as HTMLInputElement)?.files?.[0];
-
     this.processFile(file);
   }
 

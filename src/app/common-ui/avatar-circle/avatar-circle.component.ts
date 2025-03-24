@@ -4,7 +4,6 @@ import { Profile } from '../../data/interfaces/profile.interface';
 
 @Component({
   selector: 'app-avatar-circle',
-  standalone: true,
   imports: [ImgPipe],
   templateUrl: './avatar-circle.component.html',
   styleUrl: './avatar-circle.component.scss',

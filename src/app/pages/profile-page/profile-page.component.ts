@@ -6,23 +6,18 @@ import { switchMap } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { AsyncPipe } from '@angular/common';
 import { SvgIconComponent } from '../../common-ui/svg-icon/svg-icon.component';
-import { SubscriberCardComponent } from '../../common-ui/sidebar/subscriber-card/subscriber-card.component';
 import { ImgPipe } from '../../helpers/img.pipe';
 import { PostFeedComponent } from './post-feed/post-feed.component';
-import { TestDirective } from '../../exp/experimental/test.directive';
 
 @Component({
   selector: 'app-profile-page',
-  standalone: true,
   imports: [
     ProfileHeaderComponent,
     AsyncPipe,
     SvgIconComponent,
     RouterLink,
-    SubscriberCardComponent,
     ImgPipe,
     PostFeedComponent,
-    TestDirective,
   ],
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.scss',

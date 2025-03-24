@@ -8,10 +8,10 @@ import { CommentComponent } from './comment/comment.component';
 import { PostService } from '../../../data/services/post.service';
 import { firstValueFrom } from 'rxjs';
 import { DatePipe } from '../../../helpers/date.pipe';
+import { TestDirective } from '../../../exp/experimental/test.directive';
 
 @Component({
   selector: 'app-post',
-  standalone: true,
   imports: [
     AvatarCircleComponent,
     DatePipe,

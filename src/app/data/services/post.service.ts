@@ -26,6 +26,10 @@ export class PostService {
     );
   }
 
+  deletePost(id:number) {
+    return this.#http.delete(`${this.baseApiUrl}/post/${id}`)
+  }
+
   fetchPosts() {
     return this.#http
       .get<Post[]>(`${this.baseApiUrl}/post/`)

@@ -5,11 +5,11 @@ import { debounceTime, startWith, switchMap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-  selector: 'app-profile-filters',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './profile-filters.component.html',
-  styleUrl: './profile-filters.component.scss',
+    selector: 'app-profile-filters',
+    standalone: true,
+    imports: [ReactiveFormsModule],
+    templateUrl: './profile-filters.component.html',
+    styleUrl: './profile-filters.component.scss'
 })
 export class ProfileFiltersComponent {
   fd = inject(FormBuilder);

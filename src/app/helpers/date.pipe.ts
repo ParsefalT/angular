@@ -3,7 +3,6 @@ import { formatDistanceToNow } from 'date-fns';
 import { ru, enUS } from 'date-fns/locale';
 @Pipe({
   name: 'datePipe',
-  standalone: true,
 })
 export class DatePipe implements PipeTransform {
   transform(value: string | null): string {
@@ -15,7 +14,7 @@ export class DatePipe implements PipeTransform {
     if (isNaN(date.getTime())) {
       return 'wrong date';
     }
-
+    date.setHours(date.getHours() + 3);
     return formatDistanceToNow(date, { addSuffix: true, locale: enUS });
   }
 }

@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component, HostBinding, inject } from '@angular/core';
+import { Component, HostBinding, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   BehaviorSubject,
@@ -73,8 +73,7 @@ function random() {
 
 @Component({
   selector: 'app-experimental',
-  standalone: true,
-  imports: [FormsModule, JsonPipe, TestDirective],
+  imports: [FormsModule, JsonPipe],
   templateUrl: './experimental.component.html',
   styleUrl: './experimental.component.scss',
 })
@@ -87,7 +86,7 @@ export class ExperimentalComponent {
       building: 0,
     },
   };
-  directive = inject(TestDirective, {skipSelf:false});
+  directive = inject(TestDirective, { skipSelf: false });
 
   constructor() {
     this.directive.elRef.nativeElement.style.border = '10px solid violet';
@@ -107,4 +106,3 @@ export class ExperimentalComponent {
     console.log(window.ng.getDirectives(event.target)[2].form.value);
   }
 }
- 

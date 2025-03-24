@@ -4,7 +4,6 @@ import { Profile } from '../../../data/interfaces/profile.interface';
 
 @Component({
   selector: 'app-subscriber-card',
-  standalone: true,
   imports: [ImgPipe],
   templateUrl: './subscriber-card.component.html',
   styleUrl: './subscriber-card.component.scss',

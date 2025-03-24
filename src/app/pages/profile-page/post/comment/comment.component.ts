@@ -5,7 +5,6 @@ import { DatePipe } from '../../../../helpers/date.pipe';
 
 @Component({
   selector: 'app-comment',
-  standalone: true,
   imports: [AvatarCircleComponent, DatePipe],
   templateUrl: './comment.component.html',
   styleUrl: './comment.component.scss',
