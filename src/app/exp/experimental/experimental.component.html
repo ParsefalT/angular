@@ -1,6 +1,6 @@
 <form action="" [formGroup]="form" (ngSubmit)="onSubmit($event)">
   <label>
-    <select formControlName="type" >
+    <select formControlName="type">
       <option [value]="ReceiverType.PERSON">physical person</option>
       <option [value]="ReceiverType.LEGAL">government person</option>
     </select>
@@ -15,6 +15,9 @@
       required
     />
   </label>
+  @if(form.controls.name.touched && form.controls.name.hasError("required")) {
+  <p style="color: red">required</p>
+  } 
   @if(form.controls.type.value == ReceiverType.LEGAL) {
   <label>
     INN

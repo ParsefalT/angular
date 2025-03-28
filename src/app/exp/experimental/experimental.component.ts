@@ -124,13 +124,20 @@ export class ExperimentalComponent {
     };
 
     this.form.patchValue(formPatch);
+    this.form.controls.lastName.disable();
     // this.form.setValue();
   }
 
   onSubmit(event: SubmitEvent) {
+    this.form.markAllAsTouched();
+    this.form.updateValueAndValidity();
+
+    if (this.form.invalid) return;
+
     console.log(this.form.value);
+    console.log(this.form.getRawValue());
     this.form.reset({
-      type: ReceiverType.PERSON
+      type: ReceiverType.PERSON,
     });
   }
 }
