@@ -1,6 +1,14 @@
-import { JsonPipe } from '@angular/common';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 import { Component, HostBinding, inject, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  NgForm,
+  NgModelGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import {
   BehaviorSubject,
   combineLatest,
@@ -22,6 +30,8 @@ import {
   zip,
 } from 'rxjs';
 import { TestDirective } from './test.directive';
+import { NoReactValid } from './no-react.valid';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 function customFromEvent(el: HTMLElement, eventName: string) {
   return new Observable((subscribe) => {
@@ -71,38 +81,56 @@ function random() {
   });
 }
 
+enum ReceiverType {
+  PERSON = 'PERSON',
+  LEGAL = 'LEGAL',
+}
+
 @Component({
   selector: 'app-experimental',
-  imports: [FormsModule, JsonPipe],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './experimental.component.html',
   styleUrl: './experimental.component.scss',
 })
 export class ExperimentalComponent {
-  person = {
-    name: '',
-    lastName: '',
-    address: {
-      street: '',
-      building: 0,
-    },
-  };
-  directive = inject(TestDirective, { skipSelf: false });
+  ReceiverType = ReceiverType;
+
+  form = new FormGroup({
+    type: new FormControl<ReceiverType>(ReceiverType.PERSON),
+    name: new FormControl<string>('', Validators.required),
+    inn: new FormControl<string>(''),
+    lastName: new FormControl<string>(''),
+    address: new FormGroup({
+      city: new FormControl<string>(''),
+      street: new FormControl<string>(''),
+      building: new FormControl<number | null>(null),
+      apartment: new FormControl<number | null>(null),
+    }),
+  });
 
   constructor() {
-    this.directive.elRef.nativeElement.style.border = '10px solid violet';
-  }
+    this.form.controls.type.valueChanges
+      .pipe(takeUntilDestroyed())
+      .subscribe((val) => {
+        this.form.controls.inn.clearValidators();
+        if (val == ReceiverType.LEGAL) {
+          this.form.controls.inn.setValidators([Validators.required]);
+        }
+      });
 
-  hobby2: string = 'asd';
-  hobby1: string | null = '';
+    const formPatch = {
+      name: 'pars',
+      lastName: 'Alexander',
+    };
 
-  onChange(event: any) {
-    console.log(event);
-    this.person.name = event;
+    this.form.patchValue(formPatch);
+    // this.form.setValue();
   }
 
   onSubmit(event: SubmitEvent) {
-    console.log(this.hobby2);
-    //@ts-ignore
-    console.log(window.ng.getDirectives(event.target)[2].form.value);
+    console.log(this.form.value);
+    this.form.reset({
+      type: ReceiverType.PERSON
+    });
   }
 }

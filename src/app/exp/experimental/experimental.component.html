@@ -1,50 +1,78 @@
-<form (ngSubmit)="onSubmit($event)">
-  <input
-    type="text"
-    name="name"
-    id=""
-    [ngModel]="person.name"
-    (ngModelChange)="onChange($event)"
-    [ngModelOptions]="{
-      updateOn: 'blur'
-    }"
-  />
-  <br />
-  <input type="text" name="lastName" id="" [(ngModel)]="person.lastName" />
-  <input
-    type="text"
-    id=""
-    [(ngModel)]="hobby2"
-    [ngModelOptions]="{ standalone: true }"
-  />
-  <input
-    type="text"
-    id=""
-    [(ngModel)]="hobby1"
-    [ngModelOptions]="{ standalone: true }"
-    #hobby="ngModel"
-    required
-  />
-  @if (hobby.hasError("required") && hobby.touched) {
-  <span>error</span>
-  } @else {
-
-  {{ hobby1 }}
-  }
-  <br />
-  <div ngModelGroup="address">
+<form action="" [formGroup]="form" (ngSubmit)="onSubmit($event)">
+  <label>
+    <select formControlName="type" >
+      <option [value]="ReceiverType.PERSON">physical person</option>
+      <option [value]="ReceiverType.LEGAL">government person</option>
+    </select>
+  </label>
+  <label>
+    Name
     <input
       type="text"
+      class="tt-input"
+      formControlName="name"
+      placeholder="type your name"
+      required
+    />
+  </label>
+  @if(form.controls.type.value == ReceiverType.LEGAL) {
+  <label>
+    INN
+    <input
+      type="text"
+      class="tt-input"
+      formControlName="inn"
+      placeholder="type your inn"
+      required
+    />
+  </label>
+  } @else {
+  <label>
+    Lastname
+    <input
+      type="text"
+      class="tt-input"
+      formControlName="lastName"
+      placeholder="type your lastname"
+      required
+    />
+  </label>
+  }
+
+  <h2>Address send</h2>
+  <div formGroupName="address" class="test">
+    City
+    <input
+      type="text"
+      class="tt-input"
+      formControlName="city"
+      required
+      placeholder="type your city"
+    />
+    street
+    <input
+      type="text"
+      class="tt-input"
       name="street"
-      id=""
-      [(ngModel)]="person.address.street"
+      required
+      placeholder="type your street"
+    />
+    building
+    <input
+      type="text"
+      class="tt-input"
+      formControlName="building"
+      required
+      placeholder="type your building"
+    />
+    apartment
+    <input
+      type="text"
+      class="tt-input"
+      placeholder="type your apartment"
+      formControlName="apartment"
+      required
     />
   </div>
-  <br />
-
-  <pre>
-    {{ person | json }}
-  </pre>
-
-  <button type="submit">submit</button>
+  <button class="btn" [disabled]="form.invalid">confirm</button>
 </form>
