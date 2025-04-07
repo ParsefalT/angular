@@ -19,9 +19,9 @@ import {
 export class NoReactValid implements Validator {
   change!: () => void;
 
-  validate(control: AbstractControl): ValidationErrors | null {
+  validate(control: AbstractControl<string>): ValidationErrors | null {
     console.log(control.value);
-    return control.value == 'react'
+    return control.value?.toLowerCase() == 'react'
       ? {
           react: { msg: 'nothing react' },
         }

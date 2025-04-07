@@ -1,6 +1,7 @@
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { Component, HostBinding, inject, signal } from '@angular/core';
 import {
+  FormArray,
   FormControl,
   FormGroup,
   FormsModule,
@@ -88,56 +89,29 @@ enum ReceiverType {
 
 @Component({
   selector: 'app-experimental',
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, JsonPipe, NoReactValid],
   templateUrl: './experimental.component.html',
   styleUrl: './experimental.component.scss',
 })
 export class ExperimentalComponent {
-  ReceiverType = ReceiverType;
+  person = {
+    name: '',
+    lastName: '',
+    address: {
+      street: '',
+      building: '',
+    },
+  };
 
-  form = new FormGroup({
-    type: new FormControl<ReceiverType>(ReceiverType.PERSON),
-    name: new FormControl<string>('', Validators.required),
-    inn: new FormControl<string>(''),
-    lastName: new FormControl<string>(''),
-    address: new FormGroup({
-      city: new FormControl<string>(''),
-      street: new FormControl<string>(''),
-      building: new FormControl<number | null>(null),
-      apartment: new FormControl<number | null>(null),
-    }),
-  });
+  hobby = '';
 
-  constructor() {
-    this.form.controls.type.valueChanges
-      .pipe(takeUntilDestroyed())
-      .subscribe((val) => {
-        this.form.controls.inn.clearValidators();
-        if (val == ReceiverType.LEGAL) {
-          this.form.controls.inn.setValidators([Validators.required]);
-        }
-      });
-
-    const formPatch = {
-      name: 'pars',
-      lastName: 'Alexander',
-    };
-
-    this.form.patchValue(formPatch);
-    this.form.controls.lastName.disable();
-    // this.form.setValue();
+  onChange(event: string) {
+    this.person.name = event;
   }
 
-  onSubmit(event: SubmitEvent) {
-    this.form.markAllAsTouched();
-    this.form.updateValueAndValidity();
-
-    if (this.form.invalid) return;
-
-    console.log(this.form.value);
-    console.log(this.form.getRawValue());
-    this.form.reset({
-      type: ReceiverType.PERSON,
-    });
+  onSubmit(form: NgForm) {
+    //@ts-ignore
+    // console.log(window.ng.getDirectives(event.target)[2].form.value);
+    console.log(form.value);
   }
 }

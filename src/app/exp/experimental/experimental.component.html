@@ -1,81 +1,49 @@
-<form action="" [formGroup]="form" (ngSubmit)="onSubmit($event)">
-  <label>
-    <select formControlName="type">
-      <option [value]="ReceiverType.PERSON">physical person</option>
-      <option [value]="ReceiverType.LEGAL">government person</option>
-    </select>
-  </label>
-  <label>
-    Name
-    <input
-      type="text"
-      class="tt-input"
-      formControlName="name"
-      placeholder="type your name"
-      required
-    />
-  </label>
-  @if(form.controls.name.touched && form.controls.name.hasError("required")) {
-  <p style="color: red">required</p>
-  } 
-  @if(form.controls.type.value == ReceiverType.LEGAL) {
-  <label>
-    INN
-    <input
-      type="text"
-      class="tt-input"
-      formControlName="inn"
-      placeholder="type your inn"
-      required
-    />
-  </label>
-  } @else {
-  <label>
-    Lastname
-    <input
-      type="text"
-      class="tt-input"
-      formControlName="lastName"
-      placeholder="type your lastname"
-      required
-    />
-  </label>
+<form action="" #form="ngForm" (ngSubmit)="onSubmit(form)">
+  <input
+    required
+    type="text"
+    name="name"
+    class="tt-input"
+    [ngModel]="person.name"
+    [ngModelOptions]="{updateOn: 'change'}"
+    (ngModelChange)="onChange($event)"
+    #usernameControl="ngModel"
+  />
+  @if(usernameControl.hasError("required") && usernameControl.touched ) {
+  <span>required field</span>
   }
 
-  <h2>Address send</h2>
-  <div formGroupName="address" class="test">
-    City
+  <input
+    type="text"
+    name="lastName"
+    class="tt-input"
+    [(ngModel)]="person.lastName"
+    no-react
+    #lastNameControl="ngModel"
+  />
+  @if(lastNameControl.hasError("react") ) {
+  <span>{{lastNameControl.getError('react') | json}}</span>
+  }
+
+  <!-- <input
+    type="text"
+    class="tt-input"
+    [(ngModel)]="hobby"
+    [ngModelOptions]="{ standalone: true }"
+  />
+  {{hobby}} -->
+  <div ngModelGroup="address">
     <input
       type="text"
-      class="tt-input"
-      formControlName="city"
-      required
-      placeholder="type your city"
-    />
-    street
-    <input
-      type="text"
-      class="tt-input"
       name="street"
-      required
-      placeholder="type your street"
-    />
-    building
-    <input
-      type="text"
       class="tt-input"
-      formControlName="building"
-      required
-      placeholder="type your building"
-    />
-    apartment
-    <input
-      type="text"
-      class="tt-input"
-      placeholder="type your apartment"
-      formControlName="apartment"
-      required
+      [(ngModel)]="person.address.street"
     />
   </div>
-  <button class="btn" [disabled]="form.invalid">confirm</button>
+  <button type="submit" [disabled]="form.invalid" class="btn">click</button>
 </form>
+<br />
+
+<pre>
+  {{ person | json }}
+</pre>
