@@ -8,6 +8,7 @@ import {
   NgForm,
   NgModelGroup,
   ReactiveFormsModule,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import {
@@ -89,29 +90,65 @@ enum ReceiverType {
 
 @Component({
   selector: 'app-experimental',
-  imports: [FormsModule, ReactiveFormsModule, JsonPipe, NoReactValid],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    ReactiveFormsModule,
+    JsonPipe,
+    // NoReactValid,
+  ],
   templateUrl: './experimental.component.html',
   styleUrl: './experimental.component.scss',
 })
 export class ExperimentalComponent {
-  person = {
-    name: '',
-    lastName: '',
-    address: {
-      street: '',
-      building: '',
-    },
-  };
+  ReceiverType = ReceiverType;
+  form = new FormGroup({
+    type: new FormControl<ReceiverType>(ReceiverType.PERSON),
+    inn: new FormControl(''),
+    name: new FormControl('', [Validators.required]),
+    lastName: new FormControl(''),
+    address: new FormGroup({
+      city: new FormControl(''),
+      street: new FormControl(''),
+      building: new FormControl<number | null>(null),
+      flat: new FormControl<number | null>(null),
+    }),
+  });
 
-  hobby = '';
+  constructor() {
+    this.form.controls.type.valueChanges
+      .pipe(takeUntilDestroyed())
+      .subscribe((val) => {
+        console.log(val);
+        this.form.controls.inn.clearValidators();
+        if (val == ReceiverType.LEGAL) {
+          this.form.controls.inn.setValidators([
+            Validators.required,
+            Validators.minLength(10),
+            Validators.maxLength(10),
+          ]);
+        }
+        this.form.controls.inn.updateValueAndValidity();
+      });
 
-  onChange(event: string) {
-    this.person.name = event;
+    // let values = {
+    //   name: 'pars',
+    //   lastName: 'alexander',
+    // };
+      this.form.controls.lastName.disable()
+    // this.form.patchValue(values);
   }
 
-  onSubmit(form: NgForm) {
-    //@ts-ignore
-    // console.log(window.ng.getDirectives(event.target)[2].form.value);
-    console.log(form.value);
+  onSubmit(event: Event) {
+    this.form.markAllAsTouched();
+    this.form.updateValueAndValidity();
+
+    if (this.form.invalid) return;
+    console.log(this.form.getRawValue())
+    console.log(this.form.value)
+    // this.form.reset({
+    //   type: this.ReceiverType.PERSON,
+    //   name: 'sex',
+    // });
   }
 }
