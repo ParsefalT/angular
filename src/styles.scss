@@ -3,6 +3,7 @@
 :root {
   --dark-hover-color: #161616;
   --primary-color: #ae7aff;
+  --chat-active: #222222;
 }
 
 html {
@@ -169,6 +170,10 @@ body {
 
 .mb4 {
   margin-bottom: 4px;
+}
+
+.mb8 {
+  margin-bottom: 8px;
 }
 
 .mb16 {

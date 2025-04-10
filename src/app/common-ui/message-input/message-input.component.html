@@ -1,11 +1,11 @@
+@if (me();as profile) {
 <app-avatar-circle
   class="size32"
-  [avatarUrl]="profile()?.avatarUrl"
+  [avatarUrl]="profile.avatarUrl"
 ></app-avatar-circle>
+}
 
 <textarea
-  name=""
-  id=""
   class="hidden-textarea"
   (input)="onTextAreaInput($event)"
   [(ngModel)]="postText"

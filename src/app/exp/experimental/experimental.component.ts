@@ -4,6 +4,7 @@ import {
   FormArray,
   FormControl,
   FormGroup,
+  FormRecord,
   FormsModule,
   NgForm,
   NgModelGroup,
@@ -34,6 +35,7 @@ import {
 import { TestDirective } from './test.directive';
 import { NoReactValid } from './no-react.valid';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Features, MockService } from './mock.service';
 
 function customFromEvent(el: HTMLElement, eventName: string) {
   return new Observable((subscribe) => {
@@ -88,6 +90,22 @@ enum ReceiverType {
   LEGAL = 'LEGAL',
 }
 
+interface Address {
+  city?: string;
+  street?: string;
+  building?: number | null;
+  flat?: number | null;
+}
+
+function getMockFields(initAddress: Address = {}) {
+  return new FormGroup({
+    city: new FormControl(initAddress.city ?? ''),
+    street: new FormControl(initAddress.street ?? ''),
+    building: new FormControl<number | null>(initAddress.building ?? null),
+    flat: new FormControl<number | null>(initAddress.flat ?? null),
+  });
+}
+
 @Component({
   selector: 'app-experimental',
   imports: [
@@ -101,21 +119,53 @@ enum ReceiverType {
   styleUrl: './experimental.component.scss',
 })
 export class ExperimentalComponent {
+  mockService = inject(MockService);
+
   ReceiverType = ReceiverType;
+  features: Features[] = [];
   form = new FormGroup({
     type: new FormControl<ReceiverType>(ReceiverType.PERSON),
     inn: new FormControl(''),
     name: new FormControl('', [Validators.required]),
-    lastName: new FormControl(''),
-    address: new FormGroup({
-      city: new FormControl(''),
-      street: new FormControl(''),
-      building: new FormControl<number | null>(null),
-      flat: new FormControl<number | null>(null),
-    }),
+    lastName: new FormControl('Alexander'),
+    addresses: new FormArray([getMockFields()]),
+    feature: new FormRecord({}),
   });
 
   constructor() {
+    this.mockService
+      .getAddress()
+      .pipe(takeUntilDestroyed())
+      .subscribe((addrs) => {
+        // while (this.form.controls.addresses.controls.length > 0) {
+        //   this.form.controls.addresses.removeAt(0);
+        // }
+
+        this.form.controls.addresses.clear();
+
+        for (const addr of addrs) {
+          this.form.controls.addresses.push(getMockFields(addr));
+        }
+
+        // this.form.controls.addresses.setControl(1, getMockFields(addrs[0]));
+
+        this.form.controls.addresses.at(0);
+      });
+
+    this.mockService
+      .getFeatures()
+      .pipe(takeUntilDestroyed())
+      .subscribe((features) => {
+        this.features = features;
+
+        for (const feat of features) {
+          this.form.controls.feature.addControl(
+            feat.code,
+            new FormControl(feat.value)
+          );
+        }
+      });
+
     this.form.controls.type.valueChanges
       .pipe(takeUntilDestroyed())
       .subscribe((val) => {
@@ -135,8 +185,15 @@ export class ExperimentalComponent {
     //   name: 'pars',
     //   lastName: 'alexander',
     // };
-      this.form.controls.lastName.disable()
+    this.form.controls.lastName.disable();
     // this.form.patchValue(values);
+  }
+
+  deleteOneAddress(index: number) {
+    this.form.controls.addresses.removeAt(index, { emitEvent: false });
+  }
+  addOneAddress() {
+    this.form.controls.addresses.push(getMockFields());
   }
 
   onSubmit(event: Event) {
@@ -144,8 +201,8 @@ export class ExperimentalComponent {
     this.form.updateValueAndValidity();
 
     if (this.form.invalid) return;
-    console.log(this.form.getRawValue())
-    console.log(this.form.value)
+    console.log(this.form.getRawValue());
+    console.log(this.form.value);
     // this.form.reset({
     //   type: this.ReceiverType.PERSON,
     //   name: 'sex',

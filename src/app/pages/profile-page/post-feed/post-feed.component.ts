@@ -12,17 +12,16 @@ import {
 } from '@angular/core';
 import { PostInputComponent } from '../post-input/post-input.component';
 import { PostComponent } from '../post/post.component';
-import { ExperimentalComponent } from '../../../exp/experimental/experimental.component';
-import { auditTime, firstValueFrom, fromEvent, last, switchMap, tap } from 'rxjs';
+import { auditTime, firstValueFrom, fromEvent, tap } from 'rxjs';
 import { ProfileService } from '../../../data/services/profile.service';
-import { TestDirective } from '../../../exp/experimental/test.directive';
-import { COLOR } from '../../../exp/experimental/InjectToken';
+import { MessageInputComponent } from '../../../common-ui/message-input/message-input.component';
 
 @Component({
   selector: 'app-post-feed',
   imports: [
     PostComponent,
-    PostInputComponent,
+    // PostInputComponent,
+    MessageInputComponent,
     // ExperimentalComponent,
     // TestDirective,
   ],
@@ -45,7 +44,7 @@ export class PostFeedComponent {
   onWindowResize() {
     fromEvent(window, 'resize')
       .pipe(
-        // auditTime(1500),
+        auditTime(1500),
         tap(() => this.resizeFeed())
       )
       .subscribe((val) => console.log(123));
@@ -68,14 +67,15 @@ export class PostFeedComponent {
     this.r2.setStyle(this.hostElement.nativeElement, 'height', `${height}px`);
   }
 
+  // createPost from custom Component
   profile = inject(ProfileService).me;
-  postId = input<number>(0);
-  isCommentInput = input(false);
-  postText: string = '';
-  @Output() created = new EventEmitter();
-
-  @HostBinding('class.comment')
-  get isComment() {
-    return this.isCommentInput();
+  onCreatePost(postText: string) {
+    firstValueFrom(
+      this.postService.createPost({
+        title: 'amazing post',
+        content: postText,
+        authorId: this.profile()!.id,
+      })
+    );
   }
 }

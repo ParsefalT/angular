@@ -32,6 +32,7 @@ export class SidebarComponent {
     { label: 'My Page', icon: 'home', link: 'profile/me' },
     { label: 'Chats', icon: 'msg', link: '/chats' },
     { label: 'Search', icon: 'search', link: '/search' },
+    { label: 'example', icon: '', link: '/example' },
   ];
 
   ngOnInit() {

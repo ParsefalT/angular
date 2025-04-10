@@ -9,6 +9,8 @@ import { PostService } from '../../../data/services/post.service';
 import { firstValueFrom } from 'rxjs';
 import { DatePipe } from '../../../helpers/date.pipe';
 import { TestDirective } from '../../../exp/experimental/test.directive';
+import { MessageInputComponent } from '../../../common-ui/message-input/message-input.component';
+import { ProfileService } from '../../../data/services/profile.service';
 
 @Component({
   selector: 'app-post',
@@ -16,8 +18,9 @@ import { TestDirective } from '../../../exp/experimental/test.directive';
     AvatarCircleComponent,
     DatePipe,
     SvgIconComponent,
-    PostInputComponent,
+    // PostInputComponent,
     CommentComponent,
+    MessageInputComponent,
   ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss',
@@ -30,13 +33,35 @@ export class PostComponent implements OnInit {
   postService = inject(PostService);
 
   async ngOnInit() {
-    this.comments.set(this.post()!.comments);
+    this.comments.set(
+      this.post()!.comments.sort(
+        (a, b) =>
+          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      )
+    );
   }
 
-  async onCreated() {
+  // add logic from input for create commentPost
+  profile = inject(ProfileService).me;
+  async onCreated(text: string) {
+    if (!text) return;
+    
+    await firstValueFrom(
+      this.postService.createComment({
+        text: text,
+        authorId: this.profile()!.id,
+        postId: this.post()!.id,
+      })
+    );
+
     const comments = await firstValueFrom(
       this.postService.getCommentsByPostId(this.post()!.id)
     );
-    this.comments.set(comments);
+    this.comments.set(
+      comments.sort(
+        (a, b) =>
+          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      )
+    );
   }
 }

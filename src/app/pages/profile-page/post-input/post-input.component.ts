@@ -37,7 +37,7 @@ export class PostInputComponent {
     return this.isCommentInput();
   }
 
-  @Input() postText: string = '';
+  postText: string = '';
 
   onTextAreaInput(event: Event) {
     const textarea = event.target as HTMLTextAreaElement;

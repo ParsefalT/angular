@@ -26,10 +26,12 @@
     }
   </div>
 
-  <app-post-input
+  <!-- <app-post-input
     [isCommentInput]="true"
     [postId]="post.id"
     (created)="onCreated()"
-  ></app-post-input>
+  ></app-post-input> -->
+
+  <app-message-input (created)="onCreated($event)"></app-message-input>
 </main>
 }
