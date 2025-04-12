@@ -1,0 +1,22 @@
+:host {
+  display: flex;
+  gap: 24px;
+}
+
+pre {
+  display: block;
+}
+
+form input {
+  width: 100%;
+}
+.address {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.line {
+  grid-column: 1/3;
+}

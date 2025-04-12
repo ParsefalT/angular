@@ -1,0 +1,293 @@
+/* You can add global styles to this file, and also import other style files */
+
+:root {
+  --dark-hover-color: #161616;
+  --primary-color: #ae7aff;
+  --chat-active: #222222;
+}
+
+html {
+  // height: 100vh;
+}
+
+body {
+  font-family: 'Roboto', serif;
+  height: 100dvh;
+  background: radial-gradient(
+      circle at -8.9% 51.2%,
+      rgb(255, 124, 0) 0%,
+      rgb(255, 124, 0) 15.9%,
+      rgb(255, 163, 77) 15.9%,
+      rgb(255, 163, 77) 24.4%,
+      rgb(19, 30, 37) 24.5%,
+      rgb(19, 30, 37) 66%
+    )
+    no-repeat;
+  color: white;
+  // background: url('/koala.jpg')  no-repeat ;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.skill-tag {
+  padding: 4px 8px;
+  border: 1px solid white;
+  border-radius: 4px;
+  display: inline;
+  font-size: 13px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  height: 32px;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-card__tags {
+  height: min-content;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.skill-tag:hover {
+  background-color: rgb(194, 142, 253);
+  cursor: default;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.btn {
+  border: none;
+  // width: 100%;
+  border-radius: 5px;
+  background-color: rgb(223, 73, 223);
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 700;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+}
+
+.btn-icon {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--dark-hover-color);
+  border-radius: 5px;
+  background-color: rgb(223, 73, 223);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg16 {
+  width: 16px;
+  height: 12px;
+  color: black;
+}
+
+.btn:hover {
+  background-color: rgb(189, 58, 189);
+}
+
+.btn:active {
+  background-color: rgb(143, 57, 143);
+  scale: 0.99;
+}
+
+.btn:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+.image {
+  width: 550px;
+  height: 550px;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+
+.h1 {
+  font-size: 48px;
+  line-height: 56px;
+  font-size: 800;
+}
+
+.h6 {
+  font-size: 18px;
+  font-weight: 800;
+  font-style: normal;
+  line-height: 24px;
+}
+
+.h4 {
+  font-size: 24px;
+  font-weight: normal;
+  font-weight: 800;
+  line-height: 32px;
+}
+
+.m16 {
+  margin-top: 16px;
+}
+
+.m20 {
+  margin-top: 20px;
+}
+
+.m32 {
+  margin-top: 32px;
+}
+
+.m60 {
+  margin-top: 60px;
+}
+
+.mb4 {
+  margin-bottom: 4px;
+}
+
+.mb8 {
+  margin-bottom: 8px;
+}
+
+.mb16 {
+  margin-bottom: 16px;
+}
+
+.mb20 {
+  margin-bottom: 20px;
+}
+
+.mb32 {
+  margin-bottom: 32px;
+}
+
+.mb60 {
+  margin-bottom: 60px;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+}
+
+.main-menu-list {
+  display: grid;
+  gap: 8px;
+  list-style-type: none;
+}
+
+.menu-item {
+  padding: 16px 12px;
+  font-size: 18px;
+  text-decoration: none;
+  display: block;
+  font-weight: bold;
+  width: 80%;
+  color: white;
+  border: none;
+  cursor: pointer;
+  &:hover,
+  &:focus-visible {
+    background-color: rgb(209, 92, 255);
+  }
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  // &.active {
+  //   background-color: rgb(143, 57, 143);
+  // }
+}
+
+.tt-form-input {
+  font-size: 14px;
+  padding: 8px 0;
+  font-weight: normal;
+  font-weight: 400;
+  line-height: 21px;
+  border: none;
+  background-color: transparent;
+  color: white;
+  border-bottom: 1px solid orange;
+}
+
+.tt-form-label {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tt-textarea {
+  height: 84px;
+  resize: none;
+}
+
+.text {
+  font-size: 12px;
+  font-weight: 500;
+  list-style: 16px;
+}
+
+.tt-control-lable {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.tt-input {
+  margin-top: 7px;
+  display: block;
+  border-radius: 4px;
+  border: 1px solid plum;
+  padding: 12px 20px;
+  width: 350px;
+
+  font-size: 14px;
+  font-weight: 400;
+  list-style: 21px;
+
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+
+.medium-text {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+}

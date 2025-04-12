@@ -1,0 +1,15 @@
+img {
+  object-fit: cover;
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+:host.size32 img {
+  width: 32px;
+  height: 32px;
+}
