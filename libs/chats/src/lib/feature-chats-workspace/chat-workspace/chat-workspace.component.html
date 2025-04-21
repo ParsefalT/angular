@@ -1,0 +1,11 @@
+@if (activateChat$ | async;as chat) {
+<tt-app-chat-workspace-header
+  [profile]="chat.companion"
+></tt-app-chat-workspace-header>
+
+<tt-app-chat-workspace-message-wrapper
+  [chat]="chat"
+></tt-app-chat-workspace-message-wrapper>
+}
+
+<!-- {{activateChat$ |async}} -->

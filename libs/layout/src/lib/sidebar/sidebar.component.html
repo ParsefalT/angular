@@ -1,0 +1,38 @@
+<img src="/koala.jpg" alt="logo" class="logo" />
+
+<nav class="m60">
+  <ul class="main-menu-list">
+    <li class="m16" *ngFor="let item of menuItems">
+      <a class="menu-item" [routerLink]="item.link" routerLinkActive="active">
+        <svg [icon]="item.icon" />
+        <span>{{ item.label }}</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<p class="medium-text m20">Subscribers</p>
+
+@for (profile of subscribers$ | async; track $index) {
+<tt-app-subscriber-card [profile]="profile"></tt-app-subscriber-card>
+}
+
+<div class="m20 to-subscribers">
+  <a [routerLink]="['/subscribers']" class="to-subscribers-link medium-text"
+    >All subscribers</a
+  >
+  <svg icon="arrow" class="to-subscribers-icon"></svg>
+</div>
+
+<footer class="sidebar__footer">
+  @if (me(); as me) { @if (me.avatarUrl) {
+  <img [src]="me.avatarUrl | imgPipe" alt="me" />
+  } @else {
+  <img src="koala.jpg" alt="koala" />
+  }
+  <div class="medium-text username-text">{{ me.firstName }}</div>
+  <a [routerLink]="['settings']" class="settings-btn">
+    <svg icon="gear"></svg>
+  </a>
+  }
+</footer>

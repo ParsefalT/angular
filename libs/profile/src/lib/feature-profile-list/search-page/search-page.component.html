@@ -1,0 +1,7 @@
+<tt-app-profile-filters> </tt-app-profile-filters>
+
+<div class="profile-card__wrapper">
+  @for (profile of profiles(); track $index) {
+  <tt-app-profile-card [profile]="profile"></tt-app-profile-card>
+  }
+</div>
