@@ -1,9 +1,13 @@
 import { Routes } from '@angular/router';
 import { canActivateAuth, LoginPageComponent } from '@tt/auth';
 import { ExperimentalComponent } from '@tt/test';
-import { ProfilePageComponent, SearchPageComponent, SettingsPageComponent } from '@tt/profile';
+import {
+  ProfilePageComponent,
+  SearchPageComponent,
+  SettingsPageComponent,
+} from '@tt/profile';
 import { chatsRoutes } from '@tt/chats';
-import {LayoutComponent} from "@tt/layout"
+import { LayoutComponent } from '@tt/layout';
 export const routes: Routes = [
   {
     path: '',

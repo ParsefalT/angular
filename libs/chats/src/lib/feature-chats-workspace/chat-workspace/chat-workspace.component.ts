@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ChatWorkspaceHeaderComponent } from './chat-workspace-header/chat-workspace-header.component';
 import { ChatWorkspaceMessageWrapperComponent } from './chat-workspace-message-wrapper/chat-workspace-message-wrapper.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter, Observable, of, switchMap, tap } from 'rxjs';
+import { filter, of, switchMap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { Chat, ChatsService } from '../../data';
 import { Profile } from '@tt/interfaces/profile';

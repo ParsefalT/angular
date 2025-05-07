@@ -20,7 +20,7 @@
     </span>
   </div>
 
-  <div class="post__comments-wrapper">
+  <div class="post__comments-wrapper" #test>
     @for (comment of comments(); track comment.id) {
     <tt-app-comment [comment]="comment"></tt-app-comment>
     }

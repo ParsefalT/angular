@@ -1,8 +1,10 @@
-@for (message of messages(); track message.id) {
 <div class="message-wrapper">
-  <tt-app-chat-workspace-message [message]="message"></tt-app-chat-workspace-message>
+  @for (message of messages(); track message.id) {
+  <tt-app-chat-workspace-message
+    [message]="message"
+  ></tt-app-chat-workspace-message>
+  }
 </div>
-}
 
 <tt-app-message-input
   (created)="onSendMessage($event)"

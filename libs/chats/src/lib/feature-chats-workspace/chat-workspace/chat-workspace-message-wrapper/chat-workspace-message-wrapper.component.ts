@@ -3,6 +3,7 @@ import { ChatWorkspaceMessageComponent } from './chat-workspace-message/chat-wor
 import { firstValueFrom } from 'rxjs';
 import { MessageInputComponent } from '@tt/common-ui';
 import { Chat, ChatsService } from '../../../data';
+// import { MessageInputComponent } from '../../../ui';
 
 @Component({
   selector: 'tt-app-chat-workspace-message-wrapper',

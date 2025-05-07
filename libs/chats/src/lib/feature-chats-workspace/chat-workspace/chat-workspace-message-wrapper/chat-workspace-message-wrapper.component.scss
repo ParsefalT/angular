@@ -1,16 +1,17 @@
 :host {
   display: grid;
   padding: 16px 20px;
-  grid-template-rows: 1fr min-content;
+  grid-template-rows: min-content;
   overflow: scroll;
   height: calc(100% - 85px);
 }
 
 .message-wrapper {
   display: grid;
+  height: min-content;
   gap: 12px;
 }
 
 .self {
-  align-items: end;
+  align-self: end;
 }

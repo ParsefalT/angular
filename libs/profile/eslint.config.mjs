@@ -24,6 +24,7 @@ export default [
           style: 'kebab-case',
         },
       ],
+      "@angular-eslint/template/interactive-supports-focus": off
     },
   },
   {
