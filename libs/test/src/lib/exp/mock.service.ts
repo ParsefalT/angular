@@ -33,12 +33,12 @@ export class MockService {
         flat: 11,
         street: 'lazani',
       },
-      {
-        city: 'www',
-        building: 1,
-        flat: 41,
-        street: 'garfild',
-      },
+      // {
+      //   city: 'www',
+      //   building: 1,
+      //   flat: 41,
+      //   street: 'garfild',
+      // },
     ]);
   }
 

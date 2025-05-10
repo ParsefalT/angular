@@ -97,7 +97,12 @@ interface Address {
   flat?: number | null;
 }
 
-function getMockFields(initAddress: Address = {}) {
+function getMockFields(initAddress: Address = {}): FormGroup<{
+  city: FormControl<string | null>;
+  street: FormControl<string | null>;
+  building: FormControl<number | null>;
+  flat: FormControl<number | null>;
+}> {
   return new FormGroup({
     city: new FormControl(initAddress.city ?? ''),
     street: new FormControl(initAddress.street ?? ''),
@@ -149,7 +154,7 @@ export class ExperimentalComponent {
 
         // this.form.controls.addresses.setControl(1, getMockFields(addrs[0]));
 
-        this.form.controls.addresses.at(0);
+        console.log(this.form.controls.addresses.at(0));
       });
 
     this.mockService
@@ -182,7 +187,7 @@ export class ExperimentalComponent {
       });
 
     // let values = {
-    //   name: 'pars',
+    //   name: 'pars228',
     //   lastName: 'alexander',
     // };
     this.form.controls.lastName.disable();
@@ -194,6 +199,7 @@ export class ExperimentalComponent {
   }
   addOneAddress() {
     this.form.controls.addresses.push(getMockFields());
+    // this.form.controls.addresses.insert(0, getMockFields());
   }
 
   onSubmit(event: Event) {
@@ -205,7 +211,7 @@ export class ExperimentalComponent {
     console.log(this.form.value);
     // this.form.reset({
     //   type: this.ReceiverType.PERSON,
-    //   name: 'sex',
+    //   name: 'bob',
     // });
   }
 }

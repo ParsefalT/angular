@@ -21,7 +21,7 @@ export class NoReactValid implements Validator {
 
   validate(control: AbstractControl<string>): ValidationErrors | null {
     console.log(control.value);
-    return control.value?.toLowerCase() == 'react'
+    return control.value?.toLowerCase() === 'react'
       ? {
           react: { msg: 'nothing react' },
         }
