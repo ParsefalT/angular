@@ -113,7 +113,7 @@ function getMockFields(initAddress: Address = {}) {
     ReactiveFormsModule,
     ReactiveFormsModule,
     JsonPipe,
-    // NoReactValid,
+    NoReactValid,
   ],
   templateUrl: './experimental.component.html',
   styleUrl: './experimental.component.scss',

@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 
 @Directive({
-  selector: '[no-react]',
+  selector: '[noReact]',
   providers: [
     {
       provide: NG_VALIDATORS,

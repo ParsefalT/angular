@@ -24,3 +24,19 @@ export const routes: Routes = [
   },
   { path: 'login', component: LoginPageComponent },
 ];
+
+type Color = 'red' | 'green' | 'blue';
+type Test<T extends Color> = T extends Color ? T : number;
+// type test<T> = T extends 'red' | "green" | "blue" ? T : number
+const fn = (): string => "asd"
+const name:Test<"green"> = "green"
+
+type ts = ReturnType<typeof fn>
+
+const l = {
+  RED: "REDd",
+  GREEN: "GREEN"
+} as const
+
+type o = typeof l[keyof typeof l]
+const g:o = 'GREEN'

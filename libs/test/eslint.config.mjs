@@ -8,19 +8,12 @@ export default [
   {
     files: ['**/*.ts'],
     rules: {
-      '@angular-eslint/directive-selector': [
-        'error',
-        {
-          type: 'attribute',
-          prefix: 'lib',
-          style: 'camelCase',
-        },
-      ],
+      '@angular-eslint/directive-selector': false,
       '@angular-eslint/component-selector': [
         'error',
         {
           type: 'element',
-          prefix: 'lib',
+          prefix: 'tt',
           style: 'kebab-case',
         },
       ],
@@ -32,3 +25,11 @@ export default [
     rules: {},
   },
 ];
+// [ directives
+//   'error',
+//   {
+//     type: 'attribute',
+//     prefix: 'tt',
+//     style: 'camelCase',
+//   },
+// ]

@@ -17,12 +17,14 @@
       type="text"
       placeholder="name"
       class="tt-input"
+      noReact
       formControlName="name"
     />
   </label>
-  @if(form.controls.name.touched && form.controls.name.hasError("required")) {
-  <small>required</small>
+  @if(form.controls.name.touched && form.controls.name.hasError("react")) {
+  <small>no-React</small>
   } @if (form.controls.type.value === ReceiverType.PERSON) {
+  <br />
   <label for="lastName">
     LastName
     <input
@@ -34,6 +36,7 @@
   </label>
 
   } @else {
+  <br />
   <label for="lastName">
     Inn
     <input
