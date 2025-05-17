@@ -1,4 +1,4 @@
-import { AsyncPipe, JsonPipe } from '@angular/common';
+import { AsyncPipe, JsonPipe, KeyValuePipe } from '@angular/common';
 import { Component, HostBinding, inject, signal } from '@angular/core';
 import {
   FormArray,
@@ -15,6 +15,7 @@ import {
 import {
   BehaviorSubject,
   combineLatest,
+  concatWith,
   filter,
   first,
   forkJoin,
@@ -24,6 +25,7 @@ import {
   map,
   Observable,
   of,
+  OperatorFunction,
   pipe,
   shareReplay,
   Subject,
@@ -110,6 +112,22 @@ function getMockFields(initAddress: Address = {}): FormGroup<{
     flat: new FormControl<number | null>(initAddress.flat ?? null),
   });
 }
+function test(): OperatorFunction<number, number[]> {
+  return (source: Observable<number>) => {
+    return new Observable((observer) => {
+      return source.subscribe({
+        next: (val) => {
+          console.log(val)
+          return observer.next([val])
+        },
+        error: (err) => console.log(err),
+        complete: () => {
+          console.log('compleat take');
+        },
+      });
+    });
+  };
+}
 
 @Component({
   selector: 'lib-app-experimental',
@@ -119,12 +137,17 @@ function getMockFields(initAddress: Address = {}): FormGroup<{
     ReactiveFormsModule,
     JsonPipe,
     NoReactValid,
+    KeyValuePipe,
+    AsyncPipe
   ],
   templateUrl: './experimental.component.html',
   styleUrl: './experimental.component.scss',
 })
 export class ExperimentalComponent {
   mockService = inject(MockService);
+
+  s$ = from([1,2,3,4,5]).pipe(test())
+
 
   ReceiverType = ReceiverType;
   features: Features[] = [];
@@ -151,7 +174,8 @@ export class ExperimentalComponent {
         for (const addr of addrs) {
           this.form.controls.addresses.push(getMockFields(addr));
         }
-
+        //@ts-ignore
+        // this.form.controls.addresses.setValue(addrs)
         // this.form.controls.addresses.setControl(1, getMockFields(addrs[0]));
 
         console.log(this.form.controls.addresses.at(0));
@@ -192,6 +216,7 @@ export class ExperimentalComponent {
     // };
     this.form.controls.lastName.disable();
     // this.form.patchValue(values);
+    // this.form.setValue(values);
   }
 
   deleteOneAddress(index: number) {
@@ -201,7 +226,8 @@ export class ExperimentalComponent {
     this.form.controls.addresses.push(getMockFields());
     // this.form.controls.addresses.insert(0, getMockFields());
   }
-
+  sort = () => 0;
+  tests = [1, 2, 3, 4, 5];
   onSubmit(event: Event) {
     this.form.markAllAsTouched();
     this.form.updateValueAndValidity();

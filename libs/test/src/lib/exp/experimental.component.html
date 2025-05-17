@@ -24,7 +24,7 @@
   @if(form.controls.name.touched && form.controls.name.hasError("react")) {
   <small>{{ form.controls.name.getError('react').msg }}</small>
   } @if(form.controls.name.touched && form.controls.name.hasError("required")) {
-  <small>required</small>
+  <small style="color: red;">it's input must be field dude</small>
   } @if (form.controls.type.value === ReceiverType.PERSON) {
   <br />
   <label for="lastName">
@@ -47,15 +47,18 @@
       class="tt-input"
       formControlName="inn"
     /> </label
-  >} 
+  >}
 
-  <div style="display: flex; justify-content: space-between; margin-top: 25px;" class="line">
+  <div
+    style="display: flex; justify-content: space-between; margin-top: 25px"
+    class="line"
+  >
     <h2>address receive</h2>
     <button class="btn" (click)="addOneAddress()">add +</button>
   </div>
-  
+
   @for (group of form.controls.addresses.controls; track $index) {
-      <div [formGroup]="group" class="address">
+  <div [formGroup]="group" class="address">
     <label for="city">
       <input
         formControlName="city"
@@ -98,7 +101,22 @@
       </button>
     </div>
   </div>
-}
+  }
+
+  <div [formGroup]="form.controls.feature">
+    <h4 class="mb16" style="margin-top: 25px;">Addition</h4>
+
+    <div style="display: grid; gap: 16px">
+      @for (item of form.controls.feature.controls | keyvalue: sort; track $index; let
+      i = $index) {
+      <label>
+        {{ features[i].label }}
+        <input type="checkbox" [formControlName]="item.key" style="width: 14px;" />
+      </label>
+
+      }
+    </div>
+  </div>
 
   <button type="submit" class="btn" style="margin-top: 12px">click</button>
 </form>
@@ -107,4 +125,11 @@
 <pre>
   {{ form.value | json }}
   {{ form.valid }}
+</pre>
+
+<pre>
+  @for (item of s$ | async; track $index) {
+    {{item}}
+  }
+  <!-- {{s$ | async}} -->
 </pre>

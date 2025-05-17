@@ -5,7 +5,9 @@
   "generators": {
     "@schematics/angular:component": {
       "style": "scss",
-      "skipTests": true
+      "skipTests": true,
+      "inlineTemplate": false,
+      "templateLanguage": "template"
     }
   },
   "sourceRoot": "apps/angular/src",
