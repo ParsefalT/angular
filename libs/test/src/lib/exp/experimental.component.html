@@ -24,7 +24,7 @@
   @if(form.controls.name.touched && form.controls.name.hasError("react")) {
   <small>{{ form.controls.name.getError('react').msg }}</small>
   } @if(form.controls.name.touched && form.controls.name.hasError("required")) {
-  <small style="color: red;">it's input must be field dude</small>
+  <small style="color: red">it's input must be field dude</small>
   } @if (form.controls.type.value === ReceiverType.PERSON) {
   <br />
   <label for="lastName">
@@ -104,14 +104,18 @@
   }
 
   <div [formGroup]="form.controls.feature">
-    <h4 class="mb16" style="margin-top: 25px;">Addition</h4>
+    <h4 class="mb16" style="margin-top: 25px">Addition</h4>
 
     <div style="display: grid; gap: 16px">
-      @for (item of form.controls.feature.controls | keyvalue: sort; track $index; let
-      i = $index) {
+      @for (item of form.controls.feature.controls | keyvalue: sort; track
+      $index; let i = $index) {
       <label>
         {{ features[i].label }}
-        <input type="checkbox" [formControlName]="item.key" style="width: 14px;" />
+        <input
+          type="checkbox"
+          [formControlName]="item.key"
+          style="width: 14px"
+        />
       </label>
 
       }

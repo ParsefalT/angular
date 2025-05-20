@@ -5,6 +5,7 @@ import {
   ProfileEffects,
   profileFeature,
   ProfilePageComponent,
+  // ProfileState,
   SearchPageComponent,
   SettingsPageComponent,
 } from '@tt/profile';
@@ -12,6 +13,8 @@ import { chatsRoutes } from '@tt/chats';
 import { LayoutComponent } from '@tt/layout';
 import { provideState } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
+// import { provideStates } from '@ngxs/store';
+
 export const routes: Routes = [
   {
     path: '',
@@ -21,6 +24,7 @@ export const routes: Routes = [
       { path: 'profile/:id', component: ProfilePageComponent },
       { path: 'settings', component: SettingsPageComponent },
       { path: 'search', component: SearchPageComponent, providers: [
+        // provideStates([ProfileState]),
         provideState(profileFeature),
         provideEffects(ProfileEffects)
       ] },

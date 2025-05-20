@@ -3,5 +3,11 @@ import { profileFeature } from "./reducer";
 
 export const selectFilteredProfiles = createSelector(
     profileFeature.selectProfiles,
-    (profiles) => profiles
+    profileFeature.selectProfileFilters,
+    (profiles, selectProfiles) => {
+        return {
+            profiles,
+            selectProfiles
+        }
+    }
 )

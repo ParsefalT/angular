@@ -1,5 +1,11 @@
 import { AsyncPipe, JsonPipe, KeyValuePipe } from '@angular/common';
-import { Component, HostBinding, inject, signal } from '@angular/core';
+import {
+  Component,
+  HostBinding,
+  inject,
+  NgModule,
+  signal,
+} from '@angular/core';
 import {
   FormArray,
   FormControl,
@@ -7,6 +13,7 @@ import {
   FormRecord,
   FormsModule,
   NgForm,
+  NgModel,
   NgModelGroup,
   ReactiveFormsModule,
   ValidatorFn,
@@ -117,8 +124,8 @@ function test(): OperatorFunction<number, number[]> {
     return new Observable((observer) => {
       return source.subscribe({
         next: (val) => {
-          console.log(val)
-          return observer.next([val])
+          console.log(val);
+          return observer.next([val]);
         },
         error: (err) => console.log(err),
         complete: () => {
@@ -134,20 +141,18 @@ function test(): OperatorFunction<number, number[]> {
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    ReactiveFormsModule,
     JsonPipe,
     NoReactValid,
     KeyValuePipe,
-    AsyncPipe
+    AsyncPipe,
   ],
   templateUrl: './experimental.component.html',
   styleUrl: './experimental.component.scss',
 })
 export class ExperimentalComponent {
   mockService = inject(MockService);
-
-  s$ = from([1,2,3,4,5]).pipe(test())
-
+test=""
+  s$ = from([1, 2, 3, 4, 5]).pipe(test());
 
   ReceiverType = ReceiverType;
   features: Features[] = [];
