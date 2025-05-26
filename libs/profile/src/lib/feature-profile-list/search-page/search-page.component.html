@@ -6,7 +6,9 @@
       <tt-app-profile-card [profile]="profile"></tt-app-profile-card>
     }
   } 
-  @placeholder (minimum 100ms){
+  @placeholder {
+    <p>loading...</p>
+  } @loading { 
     <p>loading...</p>
   }
 </div>

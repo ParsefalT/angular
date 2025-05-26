@@ -1,6 +1,5 @@
 import { inject, Injectable } from "@angular/core";
 import { Profile } from "@tt/interfaces/profile";
-// import { initialState } from "./reducer";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { FilterEvents } from "./actions.ngxs";
 import { Observable, tap } from "rxjs";

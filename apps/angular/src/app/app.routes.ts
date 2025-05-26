@@ -13,6 +13,7 @@ import { chatsRoutes } from '@tt/chats';
 import { LayoutComponent } from '@tt/layout';
 import { provideState } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
+import { PostEffects, postFeature } from '@tt/posts';
 // import { provideStates } from '@ngxs/store';
 
 export const routes: Routes = [
@@ -20,14 +21,26 @@ export const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      { path: '', redirectTo: 'profile/me', pathMatch: 'full' },
-      { path: 'profile/:id', component: ProfilePageComponent },
+      {
+        path: '',
+        redirectTo: 'profile/me',
+        pathMatch: 'full',
+      },
+      {
+        path: 'profile/:id',
+        component: ProfilePageComponent,
+        providers: [provideState(postFeature), provideEffects(PostEffects)],
+      },
       { path: 'settings', component: SettingsPageComponent },
-      { path: 'search', component: SearchPageComponent, providers: [
-        // provideStates([ProfileState]),
-        provideState(profileFeature),
-        provideEffects(ProfileEffects)
-      ] },
+      {
+        path: 'search',
+        component: SearchPageComponent,
+        providers: [
+          // provideStates([ProfileState]),
+          provideState(profileFeature),
+          provideEffects(ProfileEffects),
+        ],
+      },
       { path: 'example', component: ExperimentalComponent },
       { path: 'chats', loadChildren: () => chatsRoutes },
     ],

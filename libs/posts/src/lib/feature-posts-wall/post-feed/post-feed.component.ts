@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   HostListener,
@@ -6,11 +7,12 @@ import {
   Renderer2,
 } from '@angular/core';
 import { PostComponent } from '../post/post.component';
-import { PostService } from '../../data';
-import { auditTime, firstValueFrom, fromEvent, tap } from 'rxjs';
+import { postActions, postSelector } from '../../data';
+import { auditTime, fromEvent, tap } from 'rxjs';
 import { MessageInputComponent } from '@tt/common-ui';
 
 import { GlobalService } from '@tt/shared';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'tt-app-post-feed',
@@ -19,12 +21,16 @@ import { GlobalService } from '@tt/shared';
   styleUrl: './post-feed.component.scss',
   providers: [],
 })
-export class PostFeedComponent {
-  postService = inject(PostService);
-  feed = this.postService.posts;
+export class PostFeedComponent implements AfterViewInit {
+  store = inject(Store);
+  feed = this.store.selectSignal(postSelector);
 
   r2 = inject(Renderer2);
   hostElement = inject(ElementRef);
+
+  constructor() {
+    this.store.dispatch(postActions.getPosts());
+  }
 
   @HostListener('window:resize')
   onWindowResize() {
@@ -33,15 +39,9 @@ export class PostFeedComponent {
         auditTime(1500),
         tap(() => this.resizeFeed())
       )
-      .subscribe((val) => console.log(123));
+      .subscribe();
   }
 
-  constructor() {
-    firstValueFrom(this.postService.fetchPosts());
-  }
-  // testt() {
-  //   this.feed().map(item => this.postService.deletePost(item.id).pipe().subscribe())
-  // }
   ngAfterViewInit() {
     this.resizeFeed();
   }
@@ -55,9 +55,10 @@ export class PostFeedComponent {
 
   // createPost from custom Component
   profile = inject(GlobalService).me;
+
   onCreatePost(postText: string) {
-    firstValueFrom(
-      this.postService.createPost({
+    this.store.dispatch(
+      postActions.createPost({
         title: 'amazing post',
         content: postText,
         authorId: this.profile()!.id,

@@ -17,10 +17,10 @@ export const profileFeature = createFeature({
     reducer: createReducer(
         initialState,
         on(profileActions.profilesLoaded, (state, payload) => {
-            return {
-                ...state,
-                profiles: payload.profiles
-            }
+          return {
+              ...state,
+              profiles: payload.profiles
+          }
         }),
         on(profileActions.setFilters, (state, payload) => {
           return {

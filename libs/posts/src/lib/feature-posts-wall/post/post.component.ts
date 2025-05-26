@@ -1,17 +1,14 @@
 import {
   AfterViewChecked,
-  AfterViewInit,
   Component,
   ElementRef,
   inject,
   input,
   OnInit,
-  signal,
   ViewChild,
 } from '@angular/core';
 import { CommentComponent } from '../../ui';
-import { Post, PostComment, PostService } from '../../data';
-import { firstValueFrom } from 'rxjs';
+import { Post, postActions } from '../../data';
 import {
   AvatarCircleComponent,
   DatePipe,
@@ -19,6 +16,7 @@ import {
   SvgIconComponent,
 } from '@tt/common-ui';
 import { GlobalService } from '@tt/shared';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'tt-app-post',
@@ -33,18 +31,13 @@ import { GlobalService } from '@tt/shared';
   styleUrl: './post.component.scss',
 })
 export class PostComponent implements OnInit, AfterViewChecked {
+  store = inject(Store);
   post = input<Post>();
-
-  comments = signal<PostComment[]>([]);
   @ViewChild('test') elem!: ElementRef;
-  postService = inject(PostService);
 
   async ngOnInit() {
-    this.comments.set(
-      this.post()!.comments.sort(
-        (a, b) =>
-          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-      )
+    this.store.dispatch(
+      postActions.getCommentsByPostId({ postId: this.post()!.id })
     );
   }
   // maybe you find another best way
@@ -54,26 +47,15 @@ export class PostComponent implements OnInit, AfterViewChecked {
 
   // add logic from input for create commentPost
   profile = inject(GlobalService).me;
-  async onCreated(text: string) {
+  onCreated(text: string) {
     if (!text) return;
 
-    await firstValueFrom(
-      this.postService.createComment({
+    this.store.dispatch(
+      postActions.createComment({
         text: text,
         authorId: this.profile()!.id,
         postId: this.post()!.id,
       })
-    );
-
-    const comments = await firstValueFrom(
-      this.postService.getCommentsByPostId(this.post()!.id)
-    );
-
-    this.comments.set(
-      comments.sort(
-        (a, b) =>
-          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-      )
     );
   }
 }

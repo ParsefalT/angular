@@ -16,12 +16,12 @@
   <div class="post-counters">
     <span class="comment-amount">
       <svg class="svg16" icon="comment"></svg>
-      <span class="comments-length">{{ comments().length }}</span>
+      <span class="comments-length">{{ post.comments.length }}</span>
     </span>
   </div>
 
   <div class="post__comments-wrapper" #test>
-    @for (comment of comments(); track comment.id) {
+    @for (comment of post.comments; track comment.id) {
     <tt-app-comment [comment]="comment"></tt-app-comment>
     }
   </div>

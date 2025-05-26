@@ -10,7 +10,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authTokenInterceptor } from '@tt/auth';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
-import {provideStoreDevtools} from "@ngrx/store-devtools"
+import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 // import {provideStore} from '@ngxs/store'
 
@@ -22,10 +22,9 @@ export const appConfig: ApplicationConfig = {
     provideStore(),
     provideEffects(),
     provideStoreDevtools({
-      name: "tik-talk",
-      maxAge: 30,
+      name: 'tik-talk',
       trace: true,
-      connectInZone: true
+      connectInZone: true,
     }),
     // {
     // provide: APP_INITIALIZER,
