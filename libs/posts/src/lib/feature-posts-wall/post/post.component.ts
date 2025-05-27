@@ -30,16 +30,16 @@ import { Store } from '@ngrx/store';
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss',
 })
-export class PostComponent implements OnInit, AfterViewChecked {
+export class PostComponent implements AfterViewChecked {
   store = inject(Store);
   post = input<Post>();
   @ViewChild('test') elem!: ElementRef;
 
-  async ngOnInit() {
-    this.store.dispatch(
-      postActions.getCommentsByPostId({ postId: this.post()!.id })
-    );
-  }
+  // ngOnInit() {
+  //     this.store.dispatch(
+  //       postActions.getCommentsByPostId({ postId: this.post()!.id })
+  //     );
+  // }
   // maybe you find another best way
   ngAfterViewChecked() {
     this.elem.nativeElement.scroll(0, this.elem.nativeElement.scrollHeight);
