@@ -7,18 +7,19 @@ import {
   Renderer2,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AvatarCircleComponent, SvgIconComponent } from '@tt/common-ui';
+import { SvgIconComponent } from '../svg-icon/svg-icon.component';
+import { AvatarCircleComponent } from '../avatar-circle/avatar-circle.component';
 
 import { GlobalService } from '@tt/shared';
 
 @Component({
   selector: 'tt-app-message-input',
   imports: [AvatarCircleComponent, FormsModule, SvgIconComponent],
-  templateUrl: './message-input.component.html',
-  styleUrl: './message-input.component.scss',
+  templateUrl: './input.component.html',
+  styleUrl: './input.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MessageInputComponent {
+export class InputComponent {
   r2 = inject(Renderer2);
   me = inject(GlobalService).me;
 

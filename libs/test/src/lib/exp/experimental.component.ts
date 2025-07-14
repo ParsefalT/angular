@@ -1,5 +1,6 @@
 import { AsyncPipe, JsonPipe, KeyValuePipe } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
   HostBinding,
   inject,
@@ -148,6 +149,7 @@ function test(): OperatorFunction<number, number[]> {
   ],
   templateUrl: './experimental.component.html',
   styleUrl: './experimental.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExperimentalComponent {
   mockService = inject(MockService);

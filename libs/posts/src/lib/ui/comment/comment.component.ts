@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { PostComment } from '../../data';
 import { AvatarCircleComponent, DatePipe } from '@tt/common-ui';
 
@@ -7,6 +7,7 @@ import { AvatarCircleComponent, DatePipe } from '@tt/common-ui';
   imports: [AvatarCircleComponent, DatePipe],
   templateUrl: './comment.component.html',
   styleUrl: './comment.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CommentComponent {
   comment = input<PostComment>();

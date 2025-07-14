@@ -41,3 +41,12 @@
 .mr16 {
   margin-right: 16px;
 }
+
+.tt-form-input.ng-invalid {
+  border-bottom: 2px solid red;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}

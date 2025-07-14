@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   HostListener,
@@ -20,6 +21,7 @@ import { Store } from '@ngrx/store';
   templateUrl: './post-feed.component.html',
   styleUrl: './post-feed.component.scss',
   providers: [],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostFeedComponent implements AfterViewInit {
   store = inject(Store);
