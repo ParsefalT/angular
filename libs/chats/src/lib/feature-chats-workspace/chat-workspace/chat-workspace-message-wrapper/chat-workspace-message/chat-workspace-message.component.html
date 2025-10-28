@@ -7,7 +7,8 @@
 <div class="message-container">
   <strong class="mb8" style="display: block"
     >{{ message.user?.firstName }} {{ message.user?.lastName }}
-    {{ message.createdAt | date : 'HH:mm' }}</strong
+    <!-- {{ message.createdAt | date : 'HH:mm' }}</strong -->
+    {{ message.createdAt | luxonDatePipe : 'time' }}</strong
   >
   <div class="message-text medium-text">{{ message.text }}</div>
 </div>

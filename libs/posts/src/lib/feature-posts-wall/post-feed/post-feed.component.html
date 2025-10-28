@@ -1,7 +1,7 @@
 <!-- <app-post-input></app-post-input> -->
 <tt-app-message-input (created)="onCreatePost($event)"></tt-app-message-input>
 
-@for (post of feed().feed; track post.id ) {
+@for (post of feed(); track post.id ) {
 <tt-app-post [post]="post"></tt-app-post>
 }
 <!-- <app-experimental test></app-experimental> -->

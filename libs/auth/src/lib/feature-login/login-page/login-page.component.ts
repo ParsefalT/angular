@@ -33,7 +33,7 @@ export class LoginPageComponent {
     ) {
       this.authService
         .login(this.form.value as { username: string; password: string })
-        .subscribe((res) => {
+        .subscribe(() => {
           this.router.navigate(['/']);
         });
     }

@@ -54,9 +54,7 @@ const refreshAndProceed = (
       switchMap((res) => {
         isRefreshing$.next(false);
         return next(addToken(req, res.access_token)).pipe(
-          tap(() => {
-            isRefreshing$.next(false);
-          })
+          tap(() => isRefreshing$.next(false))
         );
       })
     );

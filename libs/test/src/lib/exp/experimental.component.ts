@@ -146,15 +146,21 @@ function test(): OperatorFunction<number, number[]> {
     NoReactValid,
     KeyValuePipe,
     AsyncPipe,
+    TestDirective,
   ],
   templateUrl: './experimental.component.html',
   styleUrl: './experimental.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [TestDirective]
 })
 export class ExperimentalComponent {
   mockService = inject(MockService);
-test=""
+  test = '';
   s$ = from([1, 2, 3, 4, 5]).pipe(test());
+
+  // testDer = inject(TestDirective, {
+  //   optional: true
+  // })
 
   ReceiverType = ReceiverType;
   features: Features[] = [];
@@ -168,6 +174,8 @@ test=""
   });
 
   constructor() {
+    // console.log(this.testDer)
+
     this.mockService
       .getAddress()
       .pipe(takeUntilDestroyed())

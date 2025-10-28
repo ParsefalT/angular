@@ -7,7 +7,13 @@
 <div class="last-message-wrapper">
   <div class="medium-text chat-user">
     {{ chat.userFrom.firstName }} {{ chat.userFrom.lastName }}
+    <span class="medium-text">{{ chat.createdAt | luxonDatePipe : 'date' }}</span>
   </div>
-  <div class="medium-text">{{ chat.message ?? '...' }}</div>
+  <div style="display: flex; justify-content:space-between">
+    <div class="medium-text">{{ chat.message ?? '...' }}</div>
+    @if (chat.unreadMessages) {
+      <div class="medium-text">{{ chat.unreadMessages }}</div>
+    }
+  </div>
 </div>
 }

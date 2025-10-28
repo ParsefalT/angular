@@ -6,6 +6,12 @@ export interface PostCreateDTO {
   authorId: number;
 }
 
+export interface CreateCommentDTO {
+  text: string;
+  authorId: number;
+  postId: number;
+}
+
 export interface Post {
   id: number;
   title: string;
@@ -29,10 +35,4 @@ export interface PostComment {
   createdAt: string;
   updatedAt: string;
   comments: [];
-}
-
-export interface CreateCommentDTO {
-  text: string;
-  authorId: number;
-  postId: number;
 }

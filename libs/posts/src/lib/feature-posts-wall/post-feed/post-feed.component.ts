@@ -21,7 +21,7 @@ import { Store } from '@ngrx/store';
   templateUrl: './post-feed.component.html',
   styleUrl: './post-feed.component.scss',
   providers: [],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostFeedComponent implements AfterViewInit {
   store = inject(Store);
@@ -59,11 +59,13 @@ export class PostFeedComponent implements AfterViewInit {
   profile = inject(GlobalService).me;
 
   onCreatePost(postText: string) {
+    if (!postText) return;
+
     this.store.dispatch(
       postActions.createPost({
         title: 'amazing post',
         content: postText,
-        authorId: this.profile()!.id,
+        authorId: this.profile()?.id || 0,
       })
     );
   }

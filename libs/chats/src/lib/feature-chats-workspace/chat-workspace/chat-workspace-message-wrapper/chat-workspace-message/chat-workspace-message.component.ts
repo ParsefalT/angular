@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, HostBinding, input } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { AvatarCircleComponent } from '@tt/common-ui';
+import { AvatarCircleComponent, LuxonDatePipe } from '@tt/common-ui';
 import { Message } from '../../../../data/index';
 @Component({
   selector: 'tt-app-chat-workspace-message',
-  imports: [AvatarCircleComponent, DatePipe],
+  imports: [AvatarCircleComponent, LuxonDatePipe],
   templateUrl: './chat-workspace-message.component.html',
   styleUrl: './chat-workspace-message.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

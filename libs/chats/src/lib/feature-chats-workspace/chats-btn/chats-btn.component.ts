@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { AvatarCircleComponent } from '@tt/common-ui';
+import { AvatarCircleComponent, LuxonDatePipe } from '@tt/common-ui';
 import { LastChatResponse } from '../../data';
 
 @Component({
   selector: 'tt-button[chats]',
-  imports: [AvatarCircleComponent],
+  imports: [AvatarCircleComponent, LuxonDatePipe],
   templateUrl: './chats-btn.component.html',
   styleUrl: './chats-btn.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatsBtnComponent {
   chat = input<LastChatResponse>();

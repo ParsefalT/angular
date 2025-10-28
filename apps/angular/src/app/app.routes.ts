@@ -9,11 +9,12 @@ import {
   SearchPageComponent,
   SettingsPageComponent,
 } from '@tt/profile';
-import { chatsRoutes } from '@tt/chats';
+// import { chatsRoutes } from '@tt/chats';
 import { LayoutComponent } from '@tt/layout';
 import { provideState } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { PostEffects, postFeature } from '@tt/posts';
+import { ErrorComponent } from './error.component';
 // import { provideStates } from '@ngxs/store';
 
 export const routes: Routes = [
@@ -42,9 +43,14 @@ export const routes: Routes = [
         ],
       },
       { path: 'example', component: ExperimentalComponent },
-      { path: 'chats', loadChildren: () => chatsRoutes },
+      {
+        path: 'chats',
+        loadChildren: () => import('@tt/chats').then((m) => m.chatsRoutes),
+      },
+      // { path: 'chats', loadChildren: () => chatsRoutes },
     ],
     canActivate: [canActivateAuth],
   },
   { path: 'login', component: LoginPageComponent },
+  { path: '**', component: ErrorComponent },
 ];

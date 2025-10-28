@@ -15,8 +15,9 @@
 </header>
 
 <main class="profile-page__body m60">
-  <tt-app-post-feed></tt-app-post-feed>
-
+  @if(isMyPage()) {
+    <tt-app-post-feed></tt-app-post-feed>
+  }
   <div>
     <h3 class="h6">Subscribers</h3>
 

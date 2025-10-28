@@ -5,8 +5,9 @@ import {
   ElementRef,
   inject,
   input,
-  OnInit,
+  Signal,
   ViewChild,
+  viewChild,
 } from '@angular/core';
 import { CommentComponent } from '../../ui';
 import { Post, postActions } from '../../data';
@@ -35,7 +36,14 @@ import { Store } from '@ngrx/store';
 export class PostComponent implements AfterViewChecked {
   store = inject(Store);
   post = input<Post>();
-  @ViewChild('test') elem!: ElementRef;
+  // hostElement: ElementRef<HTMLDivElement> = inject(ElementRef);
+  elementRef: Signal<ElementRef<HTMLDivElement>> = viewChild.required('test');
+  // ngOnInit() {
+  //     this.store.dispatch(
+  //       postActions.getCommentsByPostId({ postId: this.post()!.id })
+  //     );
+  // }
+  // maybe you find another best way
 
   // ngOnInit() {
   //     this.store.dispatch(
@@ -44,7 +52,10 @@ export class PostComponent implements AfterViewChecked {
   // }
   // maybe you find another best way
   ngAfterViewChecked() {
-    this.elem.nativeElement.scroll(0, this.elem.nativeElement.scrollHeight);
+    this.elementRef()?.nativeElement.scroll(
+      0,
+      this.elementRef()?.nativeElement.scrollHeight
+    );
   }
 
   // add logic from input for create commentPost
@@ -55,8 +66,8 @@ export class PostComponent implements AfterViewChecked {
     this.store.dispatch(
       postActions.createComment({
         text: text,
-        authorId: this.profile()!.id,
-        postId: this.post()!.id,
+        authorId: this.profile()?.id || 0,
+        postId: this.post()?.id || 0,
       })
     );
   }

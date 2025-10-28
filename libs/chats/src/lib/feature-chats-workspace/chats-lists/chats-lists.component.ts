@@ -3,7 +3,7 @@ import { ChatsBtnComponent } from '../chats-btn/chats-btn.component';
 import { AsyncPipe } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { map, startWith, switchMap } from 'rxjs';
+import { map, startWith, switchMap, timer } from 'rxjs';
 import { ChatsService } from '../../data';
 
 @Component({

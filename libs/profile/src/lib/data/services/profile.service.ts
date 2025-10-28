@@ -8,7 +8,7 @@ import { GlobalService, Pageble } from '@tt/shared';
   providedIn: 'root',
 })
 export class ProfileService {
-  baseApiUrl = 'https://icherniakov.ru/yt-course';
+  baseApiUrl = '/yt-course';
   http = inject(HttpClient);
 
   #globalStore = inject(GlobalService);
